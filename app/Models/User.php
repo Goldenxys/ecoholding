@@ -45,4 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function demandesTraitees()
+    {
+        return $this->hasMany(Demande::class, 'traite_par');
+    }
 }

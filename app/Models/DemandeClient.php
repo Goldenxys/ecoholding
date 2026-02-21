@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class DemandeClient extends Model
+class DemandeClient extends Demande
 {
     //
 }

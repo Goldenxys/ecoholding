@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\DemandeClient;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-     public function index(): View
+    public function index(): View
     {
         return view('admin.dashboard', [
             'totalDemandes' => DemandeClient::count(),

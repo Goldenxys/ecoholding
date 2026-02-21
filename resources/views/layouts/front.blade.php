@@ -8,9 +8,17 @@
 </head>
 <body>
 <nav>
-    <a href="{{ url('/') }}">Accueil</a>
-    <a href="{{ route('dashboard') }}">Dashboard</a>
-    <a href="{{ route('admin.demandes.index') }}">Admin demandes</a>
+    <a href="{{ route('home') }}">Accueil</a>
+    <a href="{{ route('presentation') }}">Présentation</a>
+    <a href="{{ route('services') }}">Services</a>
+    @auth
+        <a href="{{ route('dashboard') }}">Dashboard</a>
+        @if(auth()->user()->role === 'admin')
+            <a href="{{ route('admin.dashboard') }}">Admin</a>
+        @endif
+    @else
+        <a href="{{ route('login') }}">Connexion</a>
+    @endauth
 </nav>
 
 <main>

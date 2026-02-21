@@ -47,4 +47,9 @@ class Demande extends Model
     {
         return $this->belongsTo(User::class, 'traite_par');
     }
+
+    public function agentTraitant()
+    {
+        return $this->belongsTo(User::class, 'traite_par');
+    }
 }

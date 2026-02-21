@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Demande;
+use App\Models\DemandeClient;
+use App\Mail\NouvelleDemandeAdminMail;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class DemandeController extends Controller
 {
@@ -41,6 +48,7 @@ class DemandeController extends Controller
             ],
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -52,7 +60,7 @@ class DemandeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-public function store(Request $request): JsonResponse
+    public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
             'nom' => ['required', 'string', 'max:120'],
@@ -82,7 +90,7 @@ public function store(Request $request): JsonResponse
     /**
      * Display the specified resource.
      */
-     public function show(Demande $demande): View
+    public function show(Demande $demande): View
     {
         return view('admin.demandes.show', [
             'demande' => $demande->load('agentTraitant:id,name,email'),
@@ -114,11 +122,10 @@ public function store(Request $request): JsonResponse
         return view('admin.demandes.edit', compact('demande', 'whatsappUrl'));
     }
 
-
     /**
      * Update the specified resource in storage.
      */
-  public function update(Request $request, Demande $demande): RedirectResponse
+    public function update(Request $request, Demande $demande): RedirectResponse
     {
         $validated = $request->validate([
             'statut' => ['required', 'in:nouveau,en_cours,traite'],

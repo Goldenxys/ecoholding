@@ -27,7 +27,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Gestion des demandes
     Route::get('/demandes', [DemandeController::class, 'index'])->name('demandes.index');
     Route::get('/demandes/{demande}', [DemandeController::class, 'show'])->name('demandes.show');
-    Route::get('/demandes/{demande}/edit', [DemandeController::class, 'edit'])->name('demandes.edit');
     Route::put('/demandes/{demande}', [DemandeController::class, 'update'])->name('demandes.update');
 });
 

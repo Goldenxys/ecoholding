@@ -1,75 +1,100 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Dashboard
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="admin-dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-tachometer-alt"></i> Tableau de bord</h1>
+                <p>Bienvenue, {{ Auth::user()->name }}</p>
+            </div>
 
             {{-- Statistiques --}}
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <p class="text-sm text-gray-500">Total</p>
-                    <p class="text-2xl font-bold text-gray-800">{{ $totalDemandes }}</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>{{ $totalDemandes }}</h3>
+                        <p>Total demandes</p>
+                    </div>
                 </div>
-                <div class="bg-blue-50 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <p class="text-sm text-blue-600">Nouvelles</p>
-                    <p class="text-2xl font-bold text-blue-800">{{ $nouvellesDemandes }}</p>
+                <div class="stat-card">
+                    <div class="stat-icon new">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>{{ $nouvellesDemandes }}</h3>
+                        <p>Nouvelles demandes</p>
+                    </div>
                 </div>
-                <div class="bg-yellow-50 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <p class="text-sm text-yellow-600">En cours</p>
-                    <p class="text-2xl font-bold text-yellow-800">{{ $enCours }}</p>
+                <div class="stat-card">
+                    <div class="stat-icon in-progress">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>{{ $enCours }}</h3>
+                        <p>En cours</p>
+                    </div>
                 </div>
-                <div class="bg-green-50 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <p class="text-sm text-green-600">Traitées</p>
-                    <p class="text-2xl font-bold text-green-800">{{ $traitees }}</p>
+                <div class="stat-card">
+                    <div class="stat-icon completed">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>{{ $traitees }}</h3>
+                        <p>Traitées</p>
+                    </div>
                 </div>
             </div>
 
             {{-- Demandes récentes --}}
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800">Demandes récentes</h3>
-                        <a href="{{ route('demandes.index') }}" class="text-sm text-blue-600 hover:underline">Voir toutes</a>
-                    </div>
-
-                    <table class="w-full text-sm">
+            <div class="recent-requests">
+                <div class="section-header">
+                    <h2><i class="fas fa-clock"></i> Demandes récentes</h2>
+                    <a href="{{ route('demandes.index') }}" class="btn btn-primary">
+                        <i class="fas fa-list"></i> Voir toutes les demandes
+                    </a>
+                </div>
+                <div class="requests-table">
+                    <table>
                         <thead>
-                            <tr class="border-b text-left text-gray-500">
-                                <th class="py-2">ID</th>
-                                <th class="py-2">Nom</th>
-                                <th class="py-2">Service</th>
-                                <th class="py-2">Statut</th>
-                                <th class="py-2">Date</th>
-                                <th class="py-2"></th>
+                            <tr>
+                                <th>ID</th>
+                                <th>Client</th>
+                                <th>Service</th>
+                                <th>Statut</th>
+                                <th>Date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($demandesRecentes as $demande)
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="py-2">#{{ $demande->id }}</td>
-                                    <td class="py-2">{{ $demande->nom }}</td>
-                                    <td class="py-2">{{ $demande->service }}</td>
-                                    <td class="py-2">
-                                        @if($demande->statut === 'nouveau')
-                                            <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Nouveau</span>
-                                        @elseif($demande->statut === 'en_cours')
-                                            <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">En cours</span>
-                                        @else
-                                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Traité</span>
-                                        @endif
+                                <tr>
+                                    <td>#{{ $demande->id }}</td>
+                                    <td>
+                                        <div class="client-info">
+                                            <strong>{{ $demande->nom }} {{ $demande->prenom }}</strong>
+                                            <br><small>{{ $demande->email }}</small>
+                                        </div>
                                     </td>
-                                    <td class="py-2">{{ optional($demande->date_creation)->format('d/m/Y') }}</td>
-                                    <td class="py-2">
-                                        <a href="{{ route('demandes.show', $demande) }}" class="text-blue-600 hover:underline">Voir</a>
+                                    <td>{{ $demande->service }}</td>
+                                    <td>
+                                        <span class="status-badge status-{{ $demande->statut }}">
+                                            {{ $demande->statut === 'nouveau' ? 'Nouveau' : ($demande->statut === 'en_cours' ? 'En cours' : 'Traité') }}
+                                        </span>
+                                    </td>
+                                    <td>{{ optional($demande->date_creation)->format('d/m/Y H:i') }}</td>
+                                    <td>
+                                        <a href="{{ route('demandes.show', $demande) }}" class="btn btn-sm btn-secondary">
+                                            <i class="fas fa-eye"></i> Voir
+                                        </a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="py-4 text-center text-gray-400">Aucune demande pour le moment.</td>
+                                    <td colspan="6" class="empty-state">
+                                        <i class="fas fa-inbox"></i>
+                                        <p>Aucune demande pour le moment.</p>
+                                    </td>
                                 </tr>
                             @endforelse
                         </tbody>

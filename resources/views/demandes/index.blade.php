@@ -1,94 +1,141 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Demandes clients
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="admin-demands">
+        <div class="container">
+            <div class="page-header">
+                <h1><i class="fas fa-list"></i> Gestion des demandes</h1>
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary">
+                    <i class="fas fa-tachometer-alt"></i> Tableau de bord
+                </a>
+            </div>
 
             {{-- Filtres --}}
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <form method="GET" class="grid md:grid-cols-4 gap-3 items-end">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="text" name="email" value="{{ $filters['email'] }}" placeholder="Filtrer par email"
-                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Service</label>
-                        <input type="text" name="service" value="{{ $filters['service'] }}" placeholder="Filtrer par service"
-                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
-                        <select name="statut" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
-                            <option value="">Tous les statuts</option>
-                            <option value="nouveau" @selected($filters['statut']==='nouveau')>Nouveau</option>
-                            <option value="en_cours" @selected($filters['statut']==='en_cours')>En cours</option>
-                            <option value="traite" @selected($filters['statut']==='traite')>Traité</option>
-                        </select>
-                    </div>
-                    <div>
-                        <button type="submit" class="w-full bg-gray-800 text-white py-2 px-4 rounded-md text-sm hover:bg-gray-700">
-                            Filtrer
-                        </button>
+            <div class="filters-section">
+                <form method="GET" class="filters-form">
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label for="recherche"><i class="fas fa-search"></i> Recherche :</label>
+                            <input type="text" name="recherche" id="recherche" class="form-control"
+                                   placeholder="Nom, email, téléphone..."
+                                   value="{{ $filters['recherche'] }}">
+                        </div>
+                        <div class="filter-group">
+                            <label for="statut"><i class="fas fa-flag"></i> Statut :</label>
+                            <select name="statut" id="statut" class="form-control">
+                                <option value="">Tous les statuts</option>
+                                <option value="nouveau" @selected($filters['statut'] === 'nouveau')>Nouveau</option>
+                                <option value="en_cours" @selected($filters['statut'] === 'en_cours')>En cours</option>
+                                <option value="traite" @selected($filters['statut'] === 'traite')>Traité</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="service"><i class="fas fa-briefcase"></i> Service :</label>
+                            <select name="service" id="service" class="form-control">
+                                <option value="">Tous les services</option>
+                                <option value="Gestion d'affaires" @selected($filters['service'] === "Gestion d'affaires")>Gestion d'affaires</option>
+                                <option value="Prestige Immobilier" @selected($filters['service'] === 'Prestige Immobilier')>Prestige Immobilier</option>
+                                <option value="Eco+Trans-Logistique" @selected($filters['service'] === 'Eco+Trans-Logistique')>Eco+Trans-Logistique</option>
+                                <option value="Conseil fiscal" @selected($filters['service'] === 'Conseil fiscal')>Conseil fiscal</option>
+                                <option value="Création d'entreprise" @selected($filters['service'] === "Création d'entreprise")>Création d'entreprise</option>
+                                <option value="Autre" @selected($filters['service'] === 'Autre')>Autre</option>
+                            </select>
+                        </div>
+                        <div class="filter-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-filter"></i> Filtrer
+                            </button>
+                            <a href="{{ route('demandes.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Réinitialiser
+                            </a>
+                        </div>
                     </div>
                 </form>
             </div>
 
-            {{-- Tableau --}}
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="border-b text-left text-gray-500">
-                                <th class="py-2 px-2">ID</th>
-                                <th class="py-2 px-2">Nom</th>
-                                <th class="py-2 px-2">Email</th>
-                                <th class="py-2 px-2">Service</th>
-                                <th class="py-2 px-2">Statut</th>
-                                <th class="py-2 px-2">Assigné à</th>
-                                <th class="py-2 px-2">Créée le</th>
-                                <th class="py-2 px-2">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($demandes as $demande)
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="py-2 px-2">{{ $demande->id }}</td>
-                                    <td class="py-2 px-2">{{ $demande->nom }} {{ $demande->prenom }}</td>
-                                    <td class="py-2 px-2">{{ $demande->email }}</td>
-                                    <td class="py-2 px-2">{{ $demande->service }}</td>
-                                    <td class="py-2 px-2">
-                                        @if($demande->statut === 'nouveau')
-                                            <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Nouveau</span>
-                                        @elseif($demande->statut === 'en_cours')
-                                            <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">En cours</span>
-                                        @else
-                                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Traité</span>
-                                        @endif
-                                    </td>
-                                    <td class="py-2 px-2">{{ $demande->agentTraitant?->name ?? '—' }}</td>
-                                    <td class="py-2 px-2">{{ optional($demande->date_creation)->format('d/m/Y H:i') }}</td>
-                                    <td class="py-2 px-2 space-x-2">
-                                        <a href="{{ route('demandes.show', $demande) }}" class="text-blue-600 hover:underline">Voir</a>
-                                        <a href="{{ route('demandes.edit', $demande) }}" class="text-green-600 hover:underline">Éditer</a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="8" class="py-4 text-center text-gray-400">Aucune demande trouvée.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-
-                    <div class="mt-4">{{ $demandes->links() }}</div>
+            {{-- Liste des demandes --}}
+            <div class="demands-table-container">
+                <div class="table-header">
+                    <h2><i class="fas fa-inbox"></i> Demandes ({{ $demandes->total() }})</h2>
                 </div>
-            </div>
 
+                @if($demandes->count() > 0)
+                    <div class="demands-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Client</th>
+                                    <th>Service</th>
+                                    <th>Statut</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($demandes as $demande)
+                                    <tr class="demande-row">
+                                        <td>#{{ $demande->id }}</td>
+                                        <td>
+                                            <div class="client-info">
+                                                <strong>{{ $demande->nom }} {{ $demande->prenom }}</strong>
+                                                <br><small>{{ $demande->email }}</small>
+                                            </div>
+                                        </td>
+                                        <td>{{ $demande->service }}</td>
+                                        <td>
+                                            <span class="status-badge status-{{ $demande->statut }}">
+                                                {{ $demande->statut === 'nouveau' ? 'Nouveau' : ($demande->statut === 'en_cours' ? 'En cours' : 'Traité') }}
+                                            </span>
+                                        </td>
+                                        <td>{{ optional($demande->date_creation)->format('d/m/Y H:i') }}</td>
+                                        <td>
+                                            <a href="{{ route('demandes.show', $demande) }}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-eye"></i> Voir
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{-- Pagination --}}
+                    @if($demandes->hasPages())
+                        <div class="pagination-wrapper">
+                            @if($demandes->onFirstPage())
+                                <span class="page-link disabled"><i class="fas fa-chevron-left"></i> Précédent</span>
+                            @else
+                                <a href="{{ $demandes->previousPageUrl() }}" class="page-link">
+                                    <i class="fas fa-chevron-left"></i> Précédent
+                                </a>
+                            @endif
+
+                            @foreach($demandes->getUrlRange(1, $demandes->lastPage()) as $page => $url)
+                                @if($page == $demandes->currentPage())
+                                    <span class="page-link current">{{ $page }}</span>
+                                @else
+                                    <a href="{{ $url }}" class="page-link">{{ $page }}</a>
+                                @endif
+                            @endforeach
+
+                            @if($demandes->hasMorePages())
+                                <a href="{{ $demandes->nextPageUrl() }}" class="page-link">
+                                    Suivant <i class="fas fa-chevron-right"></i>
+                                </a>
+                            @else
+                                <span class="page-link disabled">Suivant <i class="fas fa-chevron-right"></i></span>
+                            @endif
+                        </div>
+                    @endif
+
+                @else
+                    <div class="no-demands">
+                        <i class="fas fa-inbox"></i>
+                        <h3>Aucune demande trouvée</h3>
+                        <p>Il n'y a pas de demandes correspondant aux critères sélectionnés.</p>
+                    </div>
+                @endif
+
+            </div>
         </div>
     </div>
 </x-app-layout>

@@ -1,42 +1,58 @@
 @extends('layouts.front')
 
-@section('title', 'Translogistique — ECO+HOLDING')
+@section('title', 'Eco+Translogistique — ECO+HOLDING')
 
 @section('content')
 
 <section class="hero hero--page" style="background-image:url('{{ asset('images/translogistique.jpeg') }}')">
     <div class="hero__overlay"></div>
-    <div class="container hero__content">
-        <h1 class="hero__title">Eco+Trans-Logistique</h1>
-        <p class="hero__subtitle">Des solutions logistiques fiables pour vos échanges commerciaux.</p>
+    <div class="container hero__content" data-aos="fade-up">
+        <h1 class="hero__title">ECO+Trans-Logistique</h1>
+        <p class="hero__subtitle">Import-Export &bull; Logistique &bull; Transport &bull; Véhicules</p>
     </div>
 </section>
 
-<section class="section">
-    <div class="container">
-        <div class="section-title" data-aos="fade-up">
-            <span class="section-title-small">Nos solutions</span>
-            <h2>Solutions Logistiques</h2>
-            <p>Import-export, transport et logistique intégrée.</p>
+<section class="section container">
+    <div class="grid grid-4">
+        <div class="card card--feature" data-aos="fade-up">
+            <div class="card-icon"><i class="fas fa-globe"></i></div>
+            <h3>Import – Export</h3>
+            <p>Formalités douanières, suivi des marchandises.</p>
         </div>
+        <div class="card card--feature" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-boxes-stacked"></i></div>
+            <h3>Logistique</h3>
+            <p>Approvisionnement, stockage, distribution.</p>
+        </div>
+        <div class="card card--feature" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-truck"></i></div>
+            <h3>Transport</h3>
+            <p>Gestion de flotte, VTC, coordination des chauffeurs.</p>
+        </div>
+        <div class="card card--feature" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-car"></i></div>
+            <h3>Véhicules</h3>
+            <p>Vente et achat de véhicules neufs et d'occasion.</p>
+        </div>
+    </div>
 
-        <div class="grid grid-3">
-            <div class="card service-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="card-icon"><i class="fas fa-ship"></i></div>
-                <h3 class="card-title">Import-Export</h3>
-                <p class="card-text">Facilitation des échanges commerciaux internationaux : dédouanement, formalités et suivi complet de vos cargaisons.</p>
+    <div class="grid grid-3 mt-xl">
+        <div class="card card--overlay" style="background-image: url('{{ asset('images/trans-import.jpg') }}');" data-aos="zoom-in">
+            <div class="card__overlay">
+                <h3>Export sécurisé</h3>
+                <p class="muted">Conformité, traçabilité</p>
             </div>
-
-            <div class="card service-card featured" data-aos="fade-up" data-aos-delay="200">
-                <div class="card-icon"><i class="fas fa-truck-moving"></i></div>
-                <h3 class="card-title">Transport de Marchandises</h3>
-                <p class="card-text">Transport routier, maritime et aérien avec une flotte adaptée à tous types de marchandises.</p>
+        </div>
+        <div class="card card--overlay" style="background-image: url('{{ asset('images/trans-logistique.jpg') }}');" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card__overlay">
+                <h3>Chaîne logistique</h3>
+                <p class="muted">Optimisation des coûts</p>
             </div>
-
-            <div class="card service-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="card-icon"><i class="fas fa-warehouse"></i></div>
-                <h3 class="card-title">Solutions Logistiques</h3>
-                <p class="card-text">Entreposage, gestion des stocks et distribution : une chaîne logistique optimisée de bout en bout.</p>
+        </div>
+        <div class="card card--overlay" style="background-image: url('{{ asset('images/trans-transport.jpeg') }}');" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card__overlay">
+                <h3>Mobilité</h3>
+                <p class="muted">Transport fiable</p>
             </div>
         </div>
     </div>

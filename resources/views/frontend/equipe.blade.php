@@ -4,64 +4,279 @@
 
 @section('content')
 
+{{-- Hero Section --}}
 <section class="hero hero--page" style="background-image:url('{{ asset('images/eco.jpeg') }}')">
     <div class="hero__overlay"></div>
-    <div class="container hero__content">
+    <div class="container hero__content" data-aos="fade-up">
         <h1 class="hero__title">Notre Équipe</h1>
-        <p class="hero__subtitle">Des professionnels passionnés au service de votre réussite.</p>
+        <p class="hero__subtitle">Des professionnels expérimentés et passionnés à votre service</p>
     </div>
 </section>
 
+{{-- Section CEO Showcase --}}
 <section class="section">
     <div class="container">
-        <div class="section-title" data-aos="fade-up">
-            <span class="section-title-small">Direction</span>
-            <h2>Direction Générale</h2>
-            <p>Une équipe expérimentée et engagée pour piloter la stratégie du groupe.</p>
+        <div class="section-title" data-aos="fade-up" style="margin-bottom: var(--espace-3xl)">
+            <span class="section-title-small">NOTRE DIRECTION</span>
+            <h2>Rencontrez notre CEO</h2>
+            <p>Un leader visionnaire au service de votre réussite</p>
         </div>
 
-        <div class="grid grid-3" style="max-width: 400px; margin: 0 auto;">
-            <div class="card team-card" data-aos="zoom-in">
+        <div class="ceo-showcase" data-aos="fade-up">
+            <div class="ceo-showcase__image">
+                <div class="ceo-photo-wrapper">
+                    <img src="{{ asset('images/ceo.jpeg') }}" alt="CEO ECO+HOLDING" class="ceo-photo">
+                    <div class="ceo-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>CEO</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ceo-showcase__content">
+                <div class="ceo-header">
+                    <div>
+                        <h2 class="ceo-name">Kouassi Yao</h2>
+                        <p class="ceo-title">Directeur Général & Fondateur</p>
+                    </div>
+                    <div class="ceo-socials">
+                        <a href="https://www.linkedin.com/in/eco-plus-holding-3ba682282" class="ceo-social-link" aria-label="LinkedIn" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:contact@ecoholding.ci" class="ceo-social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/2250504477268" class="ceo-social-link" aria-label="WhatsApp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ceo-bio">
+                    <p class="ceo-quote">
+                        <i class="fas fa-quote-left"></i>
+                        Notre mission est de transformer chaque défi en opportunité et d'accompagner nos clients vers l'excellence opérationnelle.
+                        <i class="fas fa-quote-right"></i>
+                    </p>
+
+                    <div class="ceo-description">
+                        <p>
+                            Fort de plus de <strong>15 ans d'expérience</strong> dans la gestion d'affaires et l'intermédiation,
+                            Kouassi Yao a fondé ECO+HOLDING avec la vision de créer un écosystème intégré de services
+                            d'excellence pour les entreprises africaines.
+                        </p>
+                        <p>
+                            Diplômé en <strong>Management Stratégique</strong> et expert reconnu en structuration de projets
+                            d'envergure, il a accompagné plus de <strong>200 entreprises</strong> dans leur développement
+                            et leur expansion en Afrique de l'Ouest.
+                        </p>
+                    </div>
+
+                    <div class="ceo-stats">
+                        <div class="ceo-stat">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Années d'expérience</div>
+                        </div>
+                        <div class="ceo-stat">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Projets réalisés</div>
+                        </div>
+                        <div class="ceo-stat">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Secteurs d'activité</div>
+                        </div>
+                    </div>
+
+                    <div class="ceo-expertise">
+                        <h4>Domaines d'expertise</h4>
+                        <div class="expertise-tags">
+                            <span class="tag">Gestion d'Affaires</span>
+                            <span class="tag">Stratégie d'Entreprise</span>
+                            <span class="tag">Développement Commercial</span>
+                            <span class="tag">Négociation Internationale</span>
+                            <span class="tag">Leadership</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- Section Équipe de Direction --}}
+<section class="section" style="background-color: var(--couleur-gris-clair)">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <span class="section-title-small">L'ÉQUIPE DE DIRECTION</span>
+            <h2>Des experts à la tête de chaque département</h2>
+            <p>Une équipe complémentaire au service de vos ambitions</p>
+        </div>
+
+        <div class="grid grid-3">
+            <div class="card team-card" data-aos="zoom-in" data-aos-delay="0">
                 <div class="team-card__image">
-                    <img src="{{ asset('images/ceo.jpeg') }}" alt="Directeur Général">
+                    <img src="{{ asset('images/team-immobilier.jpeg') }}" alt="Directrice Prestige Immobilier">
                     <div class="team-overlay">
-                        <div class="footer-social" style="justify-content:center;">
-                            <a href="https://www.linkedin.com/in/eco-plus-holding-3ba682282" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://wa.me/22504477268" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <div class="team-socials">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                            <a href="#" aria-label="Téléphone"><i class="fas fa-phone"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="team-card__content">
-                    <div class="team-role">Fondateur & CEO</div>
-                    <h3 class="card-title">Directeur Général</h3>
-                    <p class="card-text">Visionnaire et entrepreneur, il pilote la stratégie globale du groupe ECO+HOLDING.</p>
+                    <h3 class="card-title">Aminata Diallo</h3>
+                    <p class="team-role">Directrice Prestige Immobilier</p>
+                    <p class="card-text">
+                        Spécialiste en gestion immobilière et valorisation de patrimoine avec une expertise
+                        reconnue sur le marché ivoirien et africain.
+                    </p>
+                    <div class="team-skills">
+                        <span>Immobilier</span>
+                        <span>Gestion Patrimoine</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card team-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="team-card__image">
+                    <img src="{{ asset('images/team-logistique.jpeg') }}" alt="Directeur Logistique">
+                    <div class="team-overlay">
+                        <div class="team-socials">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                            <a href="#" aria-label="Téléphone"><i class="fas fa-phone"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card__content">
+                    <h3 class="card-title">Ibrahim Traoré</h3>
+                    <p class="team-role">Directeur Eco+Trans-Logistique</p>
+                    <p class="card-text">
+                        Expert en logistique internationale et gestion des chaînes d'approvisionnement
+                        avec un réseau étendu à travers l'Afrique de l'Ouest.
+                    </p>
+                    <div class="team-skills">
+                        <span>Logistique</span>
+                        <span>Supply Chain</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card team-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="team-card__image">
+                    <img src="{{ asset('images/team-commercial.jpeg') }}" alt="Directeur Commercial">
+                    <div class="team-overlay">
+                        <div class="team-socials">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                            <a href="#" aria-label="Téléphone"><i class="fas fa-phone"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card__content">
+                    <h3 class="card-title">Moussa Koné</h3>
+                    <p class="team-role">Directeur Commercial</p>
+                    <p class="card-text">
+                        Stratège commercial aguerri avec un track record impressionnant dans le développement
+                        de partenariats stratégiques et la croissance d'entreprises.
+                    </p>
+                    <div class="team-skills">
+                        <span>Ventes</span>
+                        <span>Partenariats</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section" style="background: var(--couleur-gris-clair);">
+{{-- Section Valeurs d'équipe --}}
+<section class="section">
     <div class="container">
         <div class="section-title" data-aos="fade-up">
-            <span class="section-title-small">Nos forces</span>
-            <h2>Nos Engagements</h2>
+            <span class="section-title-small">NOS FORCES</span>
+            <h2>Ce qui nous unit</h2>
+            <p>Les valeurs qui guident notre action au quotidien</p>
         </div>
+
+        <div class="grid grid-2">
+            <div class="card value-card" data-aos="fade-right">
+                <div class="value-icon"><i class="fas fa-users"></i></div>
+                <div class="value-content">
+                    <h4 class="card-title">Esprit d'équipe</h4>
+                    <p class="card-text">
+                        Une collaboration étroite entre tous les membres pour garantir la meilleure
+                        qualité de service à nos clients.
+                    </p>
+                </div>
+            </div>
+            <div class="card value-card" data-aos="fade-left">
+                <div class="value-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="value-content">
+                    <h4 class="card-title">Expertise reconnue</h4>
+                    <p class="card-text">
+                        Des années d'expérience cumulées dans nos domaines respectifs pour vous
+                        accompagner avec professionnalisme.
+                    </p>
+                </div>
+            </div>
+            <div class="card value-card" data-aos="fade-right">
+                <div class="value-icon"><i class="fas fa-heart"></i></div>
+                <div class="value-content">
+                    <h4 class="card-title">Passion du service</h4>
+                    <p class="card-text">
+                        Un engagement sincère envers la réussite de chaque client et la satisfaction
+                        de leurs besoins.
+                    </p>
+                </div>
+            </div>
+            <div class="card value-card" data-aos="fade-left">
+                <div class="value-icon"><i class="fas fa-rocket"></i></div>
+                <div class="value-content">
+                    <h4 class="card-title">Innovation constante</h4>
+                    <p class="card-text">
+                        Une recherche permanente de solutions nouvelles et efficaces pour répondre
+                        aux défis de nos clients.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- Section Galerie photos --}}
+<section class="section" style="background-color: var(--couleur-gris-clair)">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <span class="section-title-small">NOTRE QUOTIDIEN</span>
+            <h2>En images</h2>
+            <p>Quelques moments de notre vie d'entreprise</p>
+        </div>
+
         <div class="grid grid-3">
-            <div class="card service-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="card-icon"><i class="fas fa-bullseye"></i></div>
-                <h3 class="card-title">Professionnalisme</h3>
-                <p class="card-text">Chaque membre est sélectionné pour son expertise et son engagement envers l'excellence.</p>
-            </div>
-            <div class="card service-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="card-icon"><i class="fas fa-headset"></i></div>
-                <h3 class="card-title">Disponibilité</h3>
-                <p class="card-text">Nous restons à l'écoute de nos clients pour répondre rapidement à leurs besoins.</p>
-            </div>
-            <div class="card service-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="card-icon"><i class="fas fa-trophy"></i></div>
-                <h3 class="card-title">Résultats</h3>
-                <p class="card-text">Notre priorité : des résultats concrets et mesurables pour chaque projet confié.</p>
+            <div class="card card--image" data-aos="fade-up" data-aos-delay="0" style="background-image: url('{{ asset('images/eco.jpeg') }}')"></div>
+            <div class="card card--image" data-aos="fade-up" data-aos-delay="100" style="background-image: url('{{ asset('images/prestige.jpeg') }}')"></div>
+            <div class="card card--image" data-aos="fade-up" data-aos-delay="200" style="background-image: url('{{ asset('images/translogistique.jpeg') }}')"></div>
+            <div class="card card--image" data-aos="fade-up" data-aos-delay="0" style="background-image: url('{{ asset('images/hero-vision.jpeg') }}')"></div>
+            <div class="card card--image" data-aos="fade-up" data-aos-delay="100" style="background-image: url('{{ asset('images/ceo.jpeg') }}')"></div>
+            <div class="card card--image" data-aos="fade-up" data-aos-delay="200" style="background-image: url('{{ asset('images/eco.jpeg') }}')"></div>
+        </div>
+    </div>
+</section>
+
+{{-- Call to Action --}}
+<section class="section">
+    <div class="container">
+        <div class="cta-card" data-aos="zoom-in">
+            <div class="cta-content">
+                <h2>Prêt à travailler avec nous ?</h2>
+                <p>
+                    Contactez notre équipe dès aujourd'hui pour discuter de votre projet
+                    et découvrir comment nous pouvons vous aider à atteindre vos objectifs.
+                </p>
+                <a href="{{ route('home') }}#contact" class="btn btn-accent btn-large">
+                    <i class="fas fa-paper-plane"></i> Nous contacter
+                </a>
             </div>
         </div>
     </div>

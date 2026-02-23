@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class AdminUserSeeder extends Seeder
@@ -13,14 +14,23 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::updateOrCreate(
-            ['email' => 'orsinimelchisedek@gmail.com'],
-            [
+        $user = User::where('email', 'orsinimelchisedek@gmail.com')->first();
+
+        if ($user) {
+            $user->forceFill([
                 'name' => 'SOSSOU',
-                'password' => 'SOSSOU3010@',
+                'password' => Hash::make('SOSSOU3010@'),
                 'role' => 'admin',
                 'actif' => true,
-            ]
-        );
+            ])->save();
+        } else {
+            User::forceCreate([
+                'email' => 'orsinimelchisedek@gmail.com',
+                'name' => 'SOSSOU',
+                'password' => Hash::make('SOSSOU3010@'),
+                'role' => 'admin',
+                'actif' => true,
+            ]);
+        }
     }
 }

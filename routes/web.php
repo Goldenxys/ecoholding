@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\DemandeController;
+use App\Http\Controllers\DemandeController;
 use Illuminate\Support\Facades\Route;
 
 // ── Frontend (public) ──────────────────────────────────────────────
@@ -19,27 +18,23 @@ Route::get('/regime-fiscal', [FrontendController::class, 'regimeFiscal'])->name(
 // ── Contact form (public, AJAX) ───────────────────────────────────
 Route::post('/demandes', [DemandeController::class, 'store'])->name('demandes.store');
 
-// ── Auth dashboard ─────────────────────────────────────────────────
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// ── Espace authentifié (Breeze) ───────────────────────────────────
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    // Dashboard avec stats des demandes
+    Route::get('/dashboard', [DemandeController::class, 'dashboard'])->name('dashboard');
+
+    // Gestion des demandes
+    Route::get('/demandes', [DemandeController::class, 'index'])->name('demandes.index');
+    Route::get('/demandes/{demande}', [DemandeController::class, 'show'])->name('demandes.show');
+    Route::get('/demandes/{demande}/edit', [DemandeController::class, 'edit'])->name('demandes.edit');
+    Route::put('/demandes/{demande}', [DemandeController::class, 'update'])->name('demandes.update');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-// ── Admin ──────────────────────────────────────────────────────────
-Route::middleware(['auth', 'admin'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
-
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
-        Route::resource('demandes', DemandeController::class)
-            ->only(['index', 'show', 'edit', 'update']);
-    });
 
 require __DIR__.'/auth.php';

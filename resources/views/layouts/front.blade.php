@@ -33,15 +33,6 @@
 
         <a href="{{ route('vision-valeurs') }}">Vision & Valeurs</a>
         <a href="{{ route('equipe') }}">Équipe</a>
-
-        @auth
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            @if(auth()->user()->role === 'admin')
-                <a href="{{ route('admin.dashboard') }}">Admin</a>
-            @endif
-        @else
-            <a href="{{ route('login') }}">Connexion</a>
-        @endauth
     </div>
 </nav>
 

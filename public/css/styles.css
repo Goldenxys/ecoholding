@@ -848,6 +848,31 @@ select.form-control {
 [data-aos="zoom-in"] { transform: scale(0.9); }
 [data-aos="zoom-in"].aos-animate { transform: scale(1); }
 
+/* ==================== CARD VARIANTS ==================== */
+.card--feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-sm);
+}
+
+.card-header {
+  margin: calc(-1 * var(--espace-lg)) calc(-1 * var(--espace-lg)) 0;
+}
+
+.card-body {
+  flex: 1;
+}
+
+.card-body ul, .card-body ol {
+  padding-left: var(--espace-md);
+  color: var(--couleur-texte-secondaire);
+}
+
+.card-body ul li, .card-body ol li {
+  margin-bottom: var(--espace-xs);
+  line-height: 1.6;
+}
+
 /* ==================== UTILITAIRES ==================== */
 .text-center { text-align: center; }
 .text-primary { color: var(--couleur-bleu-principal); }

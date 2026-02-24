@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">
     <!-- AOS Animation Library -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <!-- Font Awesome Icons -->
@@ -145,6 +146,7 @@
         delay: 100
     });
 </script>
+<script src="{{ asset('js/notifications.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 
 @yield('extra_js')

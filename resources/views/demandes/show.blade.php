@@ -6,7 +6,7 @@
                     <i class="fas fa-arrow-left"></i> Retour à la liste
                 </a>
                 <h1><i class="fas fa-file-alt"></i> Détail de la demande #{{ $demande->id }}</h1>
-                <form method="POST" action="{{ route('demandes.destroy', $demande) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?')" style="margin-left:auto;">
+                <form method="POST" action="{{ route('demandes.destroy', $demande) }}" class="eco-confirm-delete" data-confirm-title="Supprimer cette demande ?" data-confirm-message="La demande #{{ $demande->id }} de {{ $demande->nom }} sera définitivement supprimée. Cette action est irréversible." data-confirm-btn="Supprimer" style="margin-left:auto;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">
@@ -14,12 +14,6 @@
                     </button>
                 </form>
             </div>
-
-            @if(session('success'))
-                <div class="alert alert-success" style="display:block;">
-                    <i class="fas fa-check-circle"></i> {{ session('success') }}
-                </div>
-            @endif
 
             <div class="demand-detail-grid">
                 {{-- Informations client --}}

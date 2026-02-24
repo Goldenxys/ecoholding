@@ -20,6 +20,7 @@
 
         <!-- Admin CSS -->
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -79,6 +80,66 @@
                 </div>
             </footer>
         </div>
+
+    {{-- Notification system --}}
+    <script src="{{ asset('js/notifications.js') }}"></script>
+
+    {{-- Flash messages → toast popups --}}
+    @if(session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.success(@json(session('success')));
+            });
+        </script>
+    @endif
+
+    @if(session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.error(@json(session('error')));
+            });
+        </script>
+    @endif
+
+    @if(session('warning'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.warning(@json(session('warning')));
+            });
+        </script>
+    @endif
+
+    @if(session('info'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.info(@json(session('info')));
+            });
+        </script>
+    @endif
+
+    @if(session('status') === 'profile-updated')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.success('Profil mis à jour avec succès.');
+            });
+        </script>
+    @endif
+
+    @if(session('status') === 'password-updated')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.success('Mot de passe mis à jour avec succès.');
+            });
+        </script>
+    @endif
+
+    @if($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.error(@json('Veuillez corriger les erreurs dans le formulaire.'));
+            });
+        </script>
+    @endif
 
     </body>
 </html>

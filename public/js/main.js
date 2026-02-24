@@ -93,7 +93,9 @@ if (contactForm) {
       const data = await response.json();
 
       if (data.success) {
-        afficher_message(data.message, 'success');
+        if (window.EcoNotify) {
+          EcoNotify.success(data.message || 'Votre demande a été envoyée avec succès !');
+        }
         contactForm.reset();
       } else {
         if (data.errors) {
@@ -109,10 +111,14 @@ if (contactForm) {
             }
           });
         }
-        afficher_message(data.message || 'Erreur de validation.', 'error');
+        if (window.EcoNotify) {
+          EcoNotify.error(data.message || 'Veuillez corriger les erreurs dans le formulaire.');
+        }
       }
     } catch (error) {
-      afficher_message("Une erreur s'est produite. Veuillez réessayer.", 'error');
+      if (window.EcoNotify) {
+        EcoNotify.error("Une erreur s'est produite. Veuillez réessayer.");
+      }
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;

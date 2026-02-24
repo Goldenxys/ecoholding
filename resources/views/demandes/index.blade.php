@@ -92,7 +92,7 @@
                                                 <a href="{{ route('demandes.show', $demande) }}" class="btn btn-sm btn-primary">
                                                     <i class="fas fa-eye"></i> Voir
                                                 </a>
-                                                <form method="POST" action="{{ route('demandes.destroy', $demande) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?')">
+                                                <form method="POST" action="{{ route('demandes.destroy', $demande) }}" class="eco-confirm-delete" data-confirm-title="Supprimer cette demande ?" data-confirm-message="La demande #{{ $demande->id }} de {{ $demande->nom }} sera définitivement supprimée." data-confirm-btn="Supprimer">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">

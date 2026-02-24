@@ -37,6 +37,9 @@
                             <span>Espace Administration</span>
                         </a>
                     </div>
+                    <button class="admin-menu-toggle" aria-label="Toggle menu" onclick="document.querySelector('.admin-nav').classList.toggle('active')">
+                        <i class="fas fa-bars"></i>
+                    </button>
                     <nav class="admin-nav">
                         <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <i class="fas fa-tachometer-alt"></i> Dashboard

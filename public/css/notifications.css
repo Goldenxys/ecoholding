@@ -242,15 +242,59 @@
 }
 
 /* ==================== RESPONSIVE ==================== */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     #eco-toast-container {
         top: 1rem;
         right: 1rem;
-        width: calc(100% - 2rem);
+        left: 1rem;
+        width: auto;
+        max-width: none;
+    }
+
+    .eco-toast { min-width: auto; }
+
+    .eco-modal {
+        padding: 1.75rem;
+        max-width: 90vw;
+    }
+
+    .eco-modal__icon {
+        width: 56px;
+        height: 56px;
+        font-size: 1.5rem;
+    }
+
+    .eco-modal__title { font-size: 1.125rem; }
+    .eco-modal__message { font-size: 0.875rem; }
+}
+
+@media (max-width: 480px) {
+    #eco-toast-container {
+        top: 0.75rem;
+        right: 0.75rem;
+        left: 0.75rem;
+    }
+
+    .eco-toast {
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        gap: 0.5rem;
+    }
+
+    .eco-toast__icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+    }
+
+    .eco-toast__message {
+        font-size: 0.875rem;
+        padding-top: 0.2rem;
     }
 
     .eco-modal {
-        padding: 1.5rem;
+        padding: 1.25rem;
+        border-radius: 12px;
     }
 
     .eco-modal__actions {

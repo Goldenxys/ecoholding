@@ -1,16 +1,16 @@
 <x-app-layout>
     <div class="admin-demand-detail">
         <div class="container">
-            <div class="page-header">
+            <div class="page-header" style="flex-wrap:wrap;">
                 <a href="{{ route('demandes.index') }}" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Retour à la liste
+                    <i class="fas fa-arrow-left"></i> Retour
                 </a>
-                <h1><i class="fas fa-file-alt"></i> Détail de la demande #{{ $demande->id }}</h1>
-                <form method="POST" action="{{ route('demandes.destroy', $demande) }}" class="eco-confirm-delete" data-confirm-title="Supprimer cette demande ?" data-confirm-message="La demande #{{ $demande->id }} de {{ $demande->nom }} sera définitivement supprimée. Cette action est irréversible." data-confirm-btn="Supprimer" style="margin-left:auto;">
+                <h1 style="flex:1; min-width:200px;"><i class="fas fa-file-alt"></i> Demande #{{ $demande->id }}</h1>
+                <form method="POST" action="{{ route('demandes.destroy', $demande) }}" class="eco-confirm-delete" data-confirm-title="Supprimer cette demande ?" data-confirm-message="La demande #{{ $demande->id }} de {{ $demande->nom }} sera définitivement supprimée. Cette action est irréversible." data-confirm-btn="Supprimer">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash"></i> Supprimer cette demande
+                        <i class="fas fa-trash"></i> Supprimer
                     </button>
                 </form>
             </div>

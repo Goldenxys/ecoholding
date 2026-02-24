@@ -13,120 +13,86 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
-            .guest-bg {
+            * { font-family: 'Inter', sans-serif; }
+
+            body {
+                margin: 0;
+                padding: 0;
                 min-height: 100vh;
+                background: #f3f4f6;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #1a202c 100%);
-                padding: 1.5rem;
-                position: relative;
-                overflow: hidden;
             }
-            .guest-bg::before {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: radial-gradient(circle at 30% 50%, rgba(229, 62, 62, 0.08) 0%, transparent 50%),
-                            radial-gradient(circle at 70% 50%, rgba(229, 62, 62, 0.05) 0%, transparent 50%);
-                animation: subtleMove 20s ease-in-out infinite;
-            }
-            @keyframes subtleMove {
-                0%, 100% { transform: translate(0, 0); }
-                50% { transform: translate(-2%, 1%); }
-            }
-            .guest-card {
+
+            .login-wrapper {
                 width: 100%;
-                max-width: 420px;
-                background: #ffffff;
-                border-radius: 16px;
-                box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-                overflow: hidden;
-                position: relative;
-                z-index: 1;
+                max-width: 400px;
+                padding: 1.5rem;
             }
-            .guest-card-header {
-                background: #ffffff;
-                padding: 2.5rem 2rem 1.5rem;
+
+            .login-logo {
                 text-align: center;
-                border-bottom: 1px solid #f0f0f0;
+                margin-bottom: 2rem;
             }
-            .guest-logo-img {
-                width: 70px;
-                height: 70px;
+
+            .login-logo img {
+                width: 72px;
+                height: 72px;
                 border-radius: 50%;
                 object-fit: cover;
-                margin: 0 auto 1rem;
-                display: block;
-                border: 3px solid #e53e3e;
-                box-shadow: 0 4px 15px rgba(229, 62, 62, 0.2);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
-            .guest-logo-text {
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 900;
-                font-size: 1.8rem;
-                letter-spacing: 2px;
-                color: #1a202c;
-                margin: 0;
+
+            .login-logo h1 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #111827;
+                margin: 0.75rem 0 0;
+                letter-spacing: 1px;
             }
-            .guest-logo-text span {
-                color: #e53e3e;
+
+            .login-logo h1 span {
+                color: #dc2626;
             }
-            .guest-subtitle {
-                font-family: 'Montserrat', sans-serif;
-                font-size: 0.85rem;
-                color: #718096;
-                margin-top: 0.3rem;
-                font-weight: 500;
-                letter-spacing: 0.5px;
-            }
-            .guest-card-body {
+
+            .login-card {
+                background: #ffffff;
+                border-radius: 12px;
                 padding: 2rem;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
             }
-            .guest-footer {
+
+            .login-footer {
                 text-align: center;
-                margin-top: 2rem;
-                position: relative;
-                z-index: 1;
-            }
-            .guest-footer p {
-                color: rgba(255, 255, 255, 0.4);
-                font-family: 'Montserrat', sans-serif;
+                margin-top: 1.5rem;
+                color: #9ca3af;
                 font-size: 0.75rem;
-                letter-spacing: 0.5px;
             }
         </style>
     </head>
-    <body class="font-sans text-gray-900 antialiased" style="margin:0; padding:0;">
-        <div class="guest-bg">
-
-            <div class="guest-card">
-                <div class="guest-card-header">
-                    <a href="/" style="text-decoration:none;">
-                        <img src="{{ asset('images/eco.jpeg') }}" alt="ECO+HOLDING" class="guest-logo-img">
-                        <h1 class="guest-logo-text">ECO<span>+</span>HOLDING</h1>
-                        <p class="guest-subtitle">Espace sécurisé</p>
-                    </a>
-                </div>
-                <div class="guest-card-body">
-                    {{ $slot }}
-                </div>
+    <body>
+        <div class="login-wrapper">
+            <div class="login-logo">
+                <a href="/">
+                    <img src="{{ asset('images/eco.jpeg') }}" alt="ECO+HOLDING">
+                </a>
+                <h1>ECO<span>+</span>HOLDING</h1>
             </div>
 
-            <div class="guest-footer">
-                <p>&copy; {{ date('Y') }} ECO+HOLDING — Tous droits réservés</p>
+            <div class="login-card">
+                {{ $slot }}
             </div>
 
+            <div class="login-footer">
+                &copy; {{ date('Y') }} ECO+HOLDING — Tous droits réservés
+            </div>
         </div>
     </body>
 </html>

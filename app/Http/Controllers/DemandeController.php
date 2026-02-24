@@ -142,6 +142,24 @@ class DemandeController extends Controller
     }
 
     /**
+     * API: return current dashboard stats + latest demand ID (for polling).
+     */
+    public function statsApi(): JsonResponse
+    {
+        $derniereDemande = Demande::latest('date_creation')->first();
+
+        return response()->json([
+            'total' => Demande::count(),
+            'nouveau' => Demande::where('statut', Demande::STATUT_NOUVEAU)->count(),
+            'en_cours' => Demande::where('statut', Demande::STATUT_EN_COURS)->count(),
+            'traite' => Demande::where('statut', Demande::STATUT_TRAITE)->count(),
+            'derniere_id' => $derniereDemande?->id,
+            'derniere_nom' => $derniereDemande ? $derniereDemande->nom . ' ' . $derniereDemande->prenom : null,
+            'derniere_service' => $derniereDemande?->service,
+        ]);
+    }
+
+    /**
      * Delete the specified demand.
      */
     public function destroy(Demande $demande): RedirectResponse

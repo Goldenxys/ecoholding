@@ -104,4 +104,88 @@
 
         </div>
     </div>
+
+    {{-- Notification toast container --}}
+    <div id="notification-container" style="position:fixed; top:1.5rem; right:1.5rem; z-index:9999; display:flex; flex-direction:column; gap:0.75rem;"></div>
+
+    {{-- Son de notification --}}
+    <audio id="notification-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgipKRg3BkYHaDi42FdmxocH2Dg3tyb3F5foF8dm9vcnZ6enl2c3N0d3l5eHZzc3R3eXl4dnR1dnh5eXd2dXV3eHl5eHZ1dXZ4eXl4d3Z2d3h5eXh3d3d3eHh4eHd3d3d4eHh4d3d3d3h4eHh4d3d3eHh4eHh4d3d3eHh4eHh4eA==" type="audio/wav">
+    </audio>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const statsUrl = "{{ route('demandes.stats') }}";
+        let lastKnownId = {{ $demandesRecentes->first()?->id ?? 0 }};
+        const POLL_INTERVAL = 15000; // 15 secondes
+
+        function showNotification(nom, service) {
+            const container = document.getElementById('notification-container');
+            const toast = document.createElement('div');
+            toast.className = 'notification-toast';
+            toast.innerHTML = `
+                <div class="notification-icon"><i class="fas fa-bell"></i></div>
+                <div class="notification-body">
+                    <strong>Nouvelle demande !</strong>
+                    <p>${nom} — ${service}</p>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">&times;</button>
+            `;
+            container.appendChild(toast);
+
+            // Son de notification
+            try {
+                const sound = document.getElementById('notification-sound');
+                sound.currentTime = 0;
+                sound.play().catch(() => {});
+            } catch (e) {}
+
+            // Auto-suppression après 8s
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateX(100%)';
+                    setTimeout(() => toast.remove(), 400);
+                }
+            }, 8000);
+        }
+
+        function updateStats(data) {
+            const statCards = document.querySelectorAll('.stat-card .stat-content h3');
+            if (statCards.length >= 4) {
+                statCards[0].textContent = data.total;
+                statCards[1].textContent = data.nouveau;
+                statCards[2].textContent = data.en_cours;
+                statCards[3].textContent = data.traite;
+            }
+        }
+
+        function pollStats() {
+            fetch(statsUrl, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateStats(data);
+
+                if (data.derniere_id && data.derniere_id > lastKnownId) {
+                    showNotification(
+                        data.derniere_nom || 'Client',
+                        data.derniere_service || 'Service'
+                    );
+                    lastKnownId = data.derniere_id;
+
+                    // Recharger le tableau des demandes récentes
+                    setTimeout(() => location.reload(), 3000);
+                }
+            })
+            .catch(() => {});
+        }
+
+        setInterval(pollStats, POLL_INTERVAL);
+    });
+    </script>
 </x-app-layout>

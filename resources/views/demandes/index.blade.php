@@ -88,9 +88,18 @@
                                         </td>
                                         <td>{{ optional($demande->date_creation)->format('d/m/Y H:i') }}</td>
                                         <td>
-                                            <a href="{{ route('demandes.show', $demande) }}" class="btn btn-sm btn-primary">
-                                                <i class="fas fa-eye"></i> Voir
-                                            </a>
+                                            <div style="display:flex; gap:0.5rem; align-items:center;">
+                                                <a href="{{ route('demandes.show', $demande) }}" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-eye"></i> Voir
+                                                </a>
+                                                <form method="POST" action="{{ route('demandes.destroy', $demande) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

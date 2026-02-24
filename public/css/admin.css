@@ -368,6 +368,19 @@ body {
     box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
+.btn-danger {
+    background: #dc2626;
+    color: #fff;
+    border-color: #dc2626;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+    color: #fff;
+}
+
 .btn-sm { padding: 6px 12px; font-size: 0.8125rem; }
 
 /* ==================== TABLES ==================== */

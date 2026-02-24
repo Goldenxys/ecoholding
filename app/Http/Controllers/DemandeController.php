@@ -140,4 +140,16 @@ class DemandeController extends Controller
             ->route('demandes.show', $demande)
             ->with('success', 'Demande mise à jour avec succès.');
     }
+
+    /**
+     * Delete the specified demand.
+     */
+    public function destroy(Demande $demande): RedirectResponse
+    {
+        $demande->delete();
+
+        return redirect()
+            ->route('demandes.index')
+            ->with('success', 'Demande supprimée avec succès.');
+    }
 }

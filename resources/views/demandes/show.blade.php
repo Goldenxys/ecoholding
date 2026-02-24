@@ -6,6 +6,13 @@
                     <i class="fas fa-arrow-left"></i> Retour à la liste
                 </a>
                 <h1><i class="fas fa-file-alt"></i> Détail de la demande #{{ $demande->id }}</h1>
+                <form method="POST" action="{{ route('demandes.destroy', $demande) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?')" style="margin-left:auto;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Supprimer cette demande
+                    </button>
+                </form>
             </div>
 
             @if(session('success'))

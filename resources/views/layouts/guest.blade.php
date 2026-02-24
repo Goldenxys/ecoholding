@@ -8,8 +8,8 @@
         <title>{{ config('app.name', 'ECO+HOLDING') }} — Connexion</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
-        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
+        <link rel="icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
+        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,9 +80,6 @@
     <body>
         <div class="login-wrapper">
             <div class="login-logo">
-                <a href="/">
-                    <img src="{{ asset('images/eco.jpeg') }}" alt="ECO+HOLDING">
-                </a>
                 <h1>ECO<span>+</span>HOLDING</h1>
             </div>
 

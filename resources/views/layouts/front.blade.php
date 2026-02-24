@@ -8,8 +8,8 @@
     <title>@yield('title', 'ECO+HOLDING - Nous facilitons vos affaires')</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
-    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">

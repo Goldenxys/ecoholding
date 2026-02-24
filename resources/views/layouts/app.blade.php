@@ -8,8 +8,8 @@
         <title>{{ config('app.name', 'ECO+HOLDING') }} — Administration</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
-        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
+        <link rel="icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
+        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">

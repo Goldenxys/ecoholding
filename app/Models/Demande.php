@@ -35,6 +35,13 @@ class Demande extends Model
         'traite_par',
     ];
 
+    protected $attributes = [
+        'date_souhaitee' => null,
+        'notes_admin' => null,
+        'nombre_relances' => 0,
+        'email_confirmation_envoye' => false,
+    ];
+
     protected $casts = [
             'date_souhaitee' => 'date',
             'date_creation' => 'datetime',

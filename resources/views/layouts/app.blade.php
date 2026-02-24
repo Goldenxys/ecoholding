@@ -7,6 +7,10 @@
 
         <title>{{ config('app.name', 'ECO+HOLDING') }} — Administration</title>
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
+        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />

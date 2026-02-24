@@ -7,6 +7,10 @@
     <meta name="description" content="ECO+HOLDING - Cabinet de gestion d'affaires et d'intermédiation à Abidjan. Nous facilitons vos affaires, vous récoltez les résultats.">
     <title>@yield('title', 'ECO+HOLDING - Nous facilitons vos affaires')</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/eco.jpeg') }}">
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <!-- AOS Animation Library -->

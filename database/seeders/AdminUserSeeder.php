@@ -13,6 +13,19 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Compte propriétaire
+        User::updateOrCreate(
+            ['email' => 'admin@ecoholding.com'],
+            [
+                'name' => 'Admin ECO+HOLDING',
+                'password' => Hash::make('admin123'),
+                'role' => 'admin',
+                'actif' => true,
+                'email_verified_at' => now(),
+            ]
+        );
+
+        // Compte SOSSOU
         User::updateOrCreate(
             ['email' => 'orsinimelchisedek@gmail.com'],
             [

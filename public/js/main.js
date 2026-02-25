@@ -14,59 +14,109 @@ function gerer_scroll_navbar() {
 }
 window.addEventListener('scroll', gerer_scroll_navbar);
 
-// ==================== MENU MOBILE ====================
+// ==================== MENU MOBILE — OFF-CANVAS DRAWER ====================
 const navbarToggle = document.querySelector('.navbar-toggle');
-const navbarMenu = document.querySelector('.navbar-menu');
+const navbarMenu   = document.querySelector('.navbar-menu');
 
-function toggleMobileMenu(open) {
-  if (!navbarToggle || !navbarMenu) return;
-  const isActive = typeof open === 'boolean' ? open : !navbarMenu.classList.contains('active');
-  navbarMenu.classList.toggle('active', isActive);
-  document.body.style.overflow = isActive ? 'hidden' : '';
-  const spans = navbarToggle.querySelectorAll('span');
-  if (isActive) {
-    spans[0].style.transform = 'rotate(45deg) translateY(8px)';
-    spans[1].style.opacity = '0';
-    spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
-  } else {
-    spans.forEach(span => { span.style.transform = 'none'; span.style.opacity = '1'; });
+// 1. Backdrop injecté dans le body
+const navBackdrop = document.createElement('div');
+navBackdrop.id = 'nav-backdrop';
+document.body.appendChild(navBackdrop);
+
+// 2. En-tête du drawer : logo + bouton fermer
+(function() {
+  var logoEl = document.querySelector('.navbar-logo');
+  if (!navbarMenu || !logoEl) return;
+  var li = document.createElement('li');
+  li.className = 'drawer-header-item';
+  li.innerHTML =
+    '<div class="drawer-header">' +
+      '<a href="' + logoEl.getAttribute('href') + '" class="drawer-logo">' + logoEl.innerHTML + '</a>' +
+      '<button class="drawer-close" aria-label="Fermer le menu"><i class="fas fa-times"></i></button>' +
+    '</div>';
+  navbarMenu.insertBefore(li, navbarMenu.firstChild);
+  li.querySelector('.drawer-close').addEventListener('click', closeDrawer);
+})();
+
+// 3. Chevrons dans les liens dropdown
+document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(link) {
+  var ch = document.createElement('i');
+  ch.className = 'fas fa-chevron-down mobile-chevron';
+  link.appendChild(ch);
+});
+
+// 4. Ouvrir / Fermer
+function openDrawer() {
+  if (!navbarMenu) return;
+  navbarMenu.classList.add('active');
+  navBackdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  if (navbarToggle) {
+    navbarToggle.setAttribute('aria-expanded', 'true');
+    var s = navbarToggle.querySelectorAll('span');
+    s[0].style.transform = 'rotate(45deg) translateY(8px)';
+    s[1].style.opacity   = '0';
+    s[2].style.transform = 'rotate(-45deg) translateY(-8px)';
   }
 }
 
-if (navbarToggle) {
-  navbarToggle.addEventListener('click', function() { toggleMobileMenu(); });
+function closeDrawer() {
+  if (!navbarMenu) return;
+  navbarMenu.classList.remove('active');
+  navBackdrop.classList.remove('active');
+  document.body.style.overflow = '';
+  if (navbarToggle) {
+    navbarToggle.setAttribute('aria-expanded', 'false');
+    navbarToggle.querySelectorAll('span').forEach(function(s) {
+      s.style.transform = 'none';
+      s.style.opacity   = '1';
+    });
+  }
+  document.querySelectorAll('.navbar-menu .dropdown.open').forEach(function(d) {
+    d.classList.remove('open');
+  });
 }
 
-// Handle dropdown toggle on mobile
-document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(dropdownLink) {
-  dropdownLink.addEventListener('click', function(e) {
-    if (window.innerWidth <= 768) {
-      const menu = this.parentElement.querySelector('.dropdown-menu');
-      if (menu) {
-        e.preventDefault();
-        const isOpen = menu.style.display === 'block';
-        document.querySelectorAll('.navbar-menu .dropdown-menu').forEach(function(dm) { dm.style.display = 'none'; });
-        menu.style.display = isOpen ? 'none' : 'block';
-      }
-    }
+// 5. Bouton hamburger
+if (navbarToggle) {
+  navbarToggle.addEventListener('click', function() {
+    navbarMenu.classList.contains('active') ? closeDrawer() : openDrawer();
+  });
+}
+
+// 6. Fermer au clic sur le backdrop
+navBackdrop.addEventListener('click', closeDrawer);
+
+// 7. Fermer à la touche Échap
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeDrawer();
+});
+
+// 8. Toggle dropdown (mobile uniquement)
+document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    if (window.innerWidth > 768) return;
+    e.preventDefault();
+    var dropdown = this.parentElement;
+    var isOpen   = dropdown.classList.contains('open');
+    document.querySelectorAll('.navbar-menu .dropdown').forEach(function(d) { d.classList.remove('open'); });
+    if (!isOpen) dropdown.classList.add('open');
   });
 });
 
-// Fermer le menu mobile lors du clic sur un lien (sauf dropdowns)
+// 9. Fermer le drawer au clic sur un lien final (non parent dropdown)
 document.querySelectorAll('.navbar-menu a').forEach(function(link) {
   link.addEventListener('click', function() {
-    if (window.innerWidth <= 768 && !this.parentElement.classList.contains('dropdown')) {
-      toggleMobileMenu(false);
-    }
+    if (window.innerWidth > 768) return;
+    var isDropdownParent = this.parentElement.classList.contains('dropdown') &&
+                           !this.closest('.dropdown-menu');
+    if (!isDropdownParent) closeDrawer();
   });
 });
 
-// Close mobile menu on window resize
+// 10. Reset complet au resize desktop
 window.addEventListener('resize', function() {
-  if (window.innerWidth > 768 && navbarMenu && navbarMenu.classList.contains('active')) {
-    toggleMobileMenu(false);
-    document.querySelectorAll('.navbar-menu .dropdown-menu').forEach(function(dm) { dm.style.display = ''; });
-  }
+  if (window.innerWidth > 768) closeDrawer();
 });
 
 // ==================== SCROLL FLUIDE ====================

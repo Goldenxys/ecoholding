@@ -37,28 +37,6 @@ if (navbarToggle) {
   navbarToggle.addEventListener('click', function() { toggleMobileMenu(); });
 }
 
-// ── En-tête mobile (logo + bouton fermer) injecté dans le menu ──
-(function() {
-  var menu = document.querySelector('.navbar-menu');
-  var logoEl = document.querySelector('.navbar-logo');
-  if (!menu || !logoEl) return;
-
-  var headerLi = document.createElement('li');
-  headerLi.className = 'mobile-menu-header';
-  headerLi.innerHTML =
-    '<a href="' + (logoEl.href || '/') + '" class="mobile-menu-logo">' +
-      logoEl.innerHTML +
-    '</a>' +
-    '<button class="mobile-menu-close" aria-label="Fermer le menu">' +
-      '<i class="fas fa-times"></i>' +
-    '</button>';
-  menu.insertBefore(headerLi, menu.firstChild);
-
-  headerLi.querySelector('.mobile-menu-close').addEventListener('click', function() {
-    toggleMobileMenu(false);
-  });
-})();
-
 // Chevrons injectés dans les liens parents de dropdown
 document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(link) {
   var chevron = document.createElement('i');
@@ -91,7 +69,7 @@ document.querySelectorAll('.navbar-menu .dropdown-menu a').forEach(function(link
 });
 
 // Fermer au clic sur un lien direct (non dropdown)
-document.querySelectorAll('.navbar-menu > li:not(.dropdown):not(.mobile-menu-header) > a').forEach(function(link) {
+document.querySelectorAll('.navbar-menu > li:not(.dropdown) > a').forEach(function(link) {
   link.addEventListener('click', function() {
     if (window.innerWidth <= 768) toggleMobileMenu(false);
   });

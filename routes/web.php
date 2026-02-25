@@ -28,6 +28,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/demandes', [DemandeController::class, 'index'])->name('demandes.index');
     Route::get('/demandes/{demande}', [DemandeController::class, 'show'])->name('demandes.show');
     Route::put('/demandes/{demande}', [DemandeController::class, 'update'])->name('demandes.update');
+    Route::delete('/demandes/{demande}', [DemandeController::class, 'destroy'])->name('demandes.destroy');
+    Route::get('/api/demandes/stats', [DemandeController::class, 'statsApi'])->name('demandes.stats');
 });
 
 Route::middleware('auth')->group(function () {

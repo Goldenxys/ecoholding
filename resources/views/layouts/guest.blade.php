@@ -5,25 +5,90 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'ECO+HOLDING') }} — Connexion</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
+        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <style>
+            * { font-family: 'Inter', sans-serif; }
+
+            body {
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                background: #f3f4f6;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .login-wrapper {
+                width: 100%;
+                max-width: 400px;
+                padding: 1.5rem;
+            }
+
+            .login-logo {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .login-logo img {
+                width: 72px;
+                height: 72px;
+                border-radius: 50%;
+                object-fit: cover;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .login-logo h1 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #111827;
+                margin: 0.75rem 0 0;
+                letter-spacing: 1px;
+            }
+
+            .login-logo h1 span {
+                color: #dc2626;
+            }
+
+            .login-card {
+                background: #ffffff;
+                border-radius: 12px;
+                padding: 2rem;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+            }
+
+            .login-footer {
+                text-align: center;
+                margin-top: 1.5rem;
+                color: #9ca3af;
+                font-size: 0.75rem;
+            }
+        </style>
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+    <body>
+        <div class="login-wrapper">
+            <div class="login-logo">
+                <h1>ECO<span>+</span>HOLDING</h1>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <div class="login-card">
                 {{ $slot }}
+            </div>
+
+            <div class="login-footer">
+                &copy; {{ date('Y') }} ECO+HOLDING — Tous droits réservés
             </div>
         </div>
     </body>

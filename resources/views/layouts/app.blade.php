@@ -7,6 +7,10 @@
 
         <title>{{ config('app.name', 'ECO+HOLDING') }} — Administration</title>
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
+        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -16,6 +20,7 @@
 
         <!-- Admin CSS -->
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -32,6 +37,9 @@
                             <span>Espace Administration</span>
                         </a>
                     </div>
+                    <button class="admin-menu-toggle" aria-label="Toggle menu" onclick="document.querySelector('.admin-nav').classList.toggle('active')">
+                        <i class="fas fa-bars"></i>
+                    </button>
                     <nav class="admin-nav">
                         <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <i class="fas fa-tachometer-alt"></i> Dashboard
@@ -75,6 +83,66 @@
                 </div>
             </footer>
         </div>
+
+    {{-- Notification system --}}
+    <script src="{{ asset('js/notifications.js') }}"></script>
+
+    {{-- Flash messages → toast popups --}}
+    @if(session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.success(@json(session('success')));
+            });
+        </script>
+    @endif
+
+    @if(session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.error(@json(session('error')));
+            });
+        </script>
+    @endif
+
+    @if(session('warning'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.warning(@json(session('warning')));
+            });
+        </script>
+    @endif
+
+    @if(session('info'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.info(@json(session('info')));
+            });
+        </script>
+    @endif
+
+    @if(session('status') === 'profile-updated')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.success('Profil mis à jour avec succès.');
+            });
+        </script>
+    @endif
+
+    @if(session('status') === 'password-updated')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.success('Mot de passe mis à jour avec succès.');
+            });
+        </script>
+    @endif
+
+    @if($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                EcoNotify.error(@json('Veuillez corriger les erreurs dans le formulaire.'));
+            });
+        </script>
+    @endif
 
     </body>
 </html>

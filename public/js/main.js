@@ -18,33 +18,55 @@ window.addEventListener('scroll', gerer_scroll_navbar);
 const navbarToggle = document.querySelector('.navbar-toggle');
 const navbarMenu = document.querySelector('.navbar-menu');
 
-if (navbarToggle) {
-  navbarToggle.addEventListener('click', function() {
-    navbarMenu.classList.toggle('active');
-    const spans = this.querySelectorAll('span');
-    spans[0].style.transform = navbarMenu.classList.contains('active')
-      ? 'rotate(45deg) translateY(8px)'
-      : 'none';
-    spans[1].style.opacity = navbarMenu.classList.contains('active') ? '0' : '1';
-    spans[2].style.transform = navbarMenu.classList.contains('active')
-      ? 'rotate(-45deg) translateY(-8px)'
-      : 'none';
-  });
+function toggleMobileMenu(open) {
+  if (!navbarToggle || !navbarMenu) return;
+  const isActive = typeof open === 'boolean' ? open : !navbarMenu.classList.contains('active');
+  navbarMenu.classList.toggle('active', isActive);
+  document.body.style.overflow = isActive ? 'hidden' : '';
+  const spans = navbarToggle.querySelectorAll('span');
+  if (isActive) {
+    spans[0].style.transform = 'rotate(45deg) translateY(8px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+  } else {
+    spans.forEach(span => { span.style.transform = 'none'; span.style.opacity = '1'; });
+  }
 }
 
-// Fermer le menu mobile lors du clic sur un lien
-const navbarLinks = document.querySelectorAll('.navbar-menu a');
-navbarLinks.forEach(link => {
-  link.addEventListener('click', function() {
+if (navbarToggle) {
+  navbarToggle.addEventListener('click', function() { toggleMobileMenu(); });
+}
+
+// Handle dropdown toggle on mobile
+document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(dropdownLink) {
+  dropdownLink.addEventListener('click', function(e) {
     if (window.innerWidth <= 768) {
-      navbarMenu.classList.remove('active');
-      const spans = navbarToggle.querySelectorAll('span');
-      spans.forEach(span => {
-        span.style.transform = 'none';
-        span.style.opacity = '1';
-      });
+      const menu = this.parentElement.querySelector('.dropdown-menu');
+      if (menu) {
+        e.preventDefault();
+        const isOpen = menu.style.display === 'block';
+        document.querySelectorAll('.navbar-menu .dropdown-menu').forEach(function(dm) { dm.style.display = 'none'; });
+        menu.style.display = isOpen ? 'none' : 'block';
+      }
     }
   });
+});
+
+// Fermer le menu mobile lors du clic sur un lien (sauf dropdowns)
+document.querySelectorAll('.navbar-menu a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    if (window.innerWidth <= 768 && !this.parentElement.classList.contains('dropdown')) {
+      toggleMobileMenu(false);
+    }
+  });
+});
+
+// Close mobile menu on window resize
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768 && navbarMenu && navbarMenu.classList.contains('active')) {
+    toggleMobileMenu(false);
+    document.querySelectorAll('.navbar-menu .dropdown-menu').forEach(function(dm) { dm.style.display = ''; });
+  }
 });
 
 // ==================== SCROLL FLUIDE ====================
@@ -93,7 +115,9 @@ if (contactForm) {
       const data = await response.json();
 
       if (data.success) {
-        afficher_message(data.message, 'success');
+        if (window.EcoNotify) {
+          EcoNotify.success(data.message || 'Votre demande a été envoyée avec succès !');
+        }
         contactForm.reset();
       } else {
         if (data.errors) {
@@ -109,10 +133,14 @@ if (contactForm) {
             }
           });
         }
-        afficher_message(data.message || 'Erreur de validation.', 'error');
+        if (window.EcoNotify) {
+          EcoNotify.error(data.message || 'Veuillez corriger les erreurs dans le formulaire.');
+        }
       }
     } catch (error) {
-      afficher_message("Une erreur s'est produite. Veuillez réessayer.", 'error');
+      if (window.EcoNotify) {
+        EcoNotify.error("Une erreur s'est produite. Veuillez réessayer.");
+      }
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;

@@ -7,8 +7,13 @@
     <meta name="description" content="ECO+HOLDING - Cabinet de gestion d'affaires et d'intermédiation à Abidjan. Nous facilitons vos affaires, vous récoltez les résultats.">
     <title>@yield('title', 'ECO+HOLDING - Nous facilitons vos affaires')</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('images/favicon.png') }}">
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">
     <!-- AOS Animation Library -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <!-- Font Awesome Icons -->
@@ -141,6 +146,7 @@
         delay: 100
     });
 </script>
+<script src="{{ asset('js/notifications.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 
 @yield('extra_js')

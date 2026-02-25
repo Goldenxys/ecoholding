@@ -37,57 +37,70 @@ if (navbarToggle) {
   navbarToggle.addEventListener('click', function() { toggleMobileMenu(); });
 }
 
-// Injecter le chevron dans chaque lien parent de dropdown
+// ── En-tête mobile (logo + bouton fermer) injecté dans le menu ──
+(function() {
+  var menu = document.querySelector('.navbar-menu');
+  var logoEl = document.querySelector('.navbar-logo');
+  if (!menu || !logoEl) return;
+
+  var headerLi = document.createElement('li');
+  headerLi.className = 'mobile-menu-header';
+  headerLi.innerHTML =
+    '<a href="' + (logoEl.href || '/') + '" class="mobile-menu-logo">' +
+      logoEl.innerHTML +
+    '</a>' +
+    '<button class="mobile-menu-close" aria-label="Fermer le menu">' +
+      '<i class="fas fa-times"></i>' +
+    '</button>';
+  menu.insertBefore(headerLi, menu.firstChild);
+
+  headerLi.querySelector('.mobile-menu-close').addEventListener('click', function() {
+    toggleMobileMenu(false);
+  });
+})();
+
+// Chevrons injectés dans les liens parents de dropdown
 document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(link) {
-  const chevron = document.createElement('i');
+  var chevron = document.createElement('i');
   chevron.className = 'fas fa-chevron-down mobile-chevron';
   link.appendChild(chevron);
 });
 
-// Toggle dropdown au clic sur mobile
-document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(dropdownLink) {
-  dropdownLink.addEventListener('click', function(e) {
-    if (window.innerWidth <= 768) {
-      e.preventDefault();
-      const dropdown = this.parentElement;
-      const isOpen = dropdown.classList.contains('open');
-      // Ferme tous les autres dropdowns
-      document.querySelectorAll('.navbar-menu .dropdown').forEach(function(d) {
-        d.classList.remove('open');
-      });
-      if (!isOpen) {
-        dropdown.classList.add('open');
-      }
-    }
+// Toggle dropdown au clic (mobile uniquement)
+document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    if (window.innerWidth > 768) return;
+    e.preventDefault();
+    var dropdown = this.parentElement;
+    var isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.navbar-menu .dropdown').forEach(function(d) {
+      d.classList.remove('open');
+    });
+    if (!isOpen) dropdown.classList.add('open');
   });
 });
 
-// Fermer le menu mobile lors du clic sur un sous-lien
+// Fermer tout au clic sur un sous-lien
 document.querySelectorAll('.navbar-menu .dropdown-menu a').forEach(function(link) {
   link.addEventListener('click', function() {
-    if (window.innerWidth <= 768) {
-      const dropdown = this.closest('.dropdown');
-      if (dropdown) dropdown.classList.remove('open');
-      toggleMobileMenu(false);
-    }
+    if (window.innerWidth > 768) return;
+    var dropdown = this.closest('.dropdown');
+    if (dropdown) dropdown.classList.remove('open');
+    toggleMobileMenu(false);
   });
 });
 
-// Fermer le menu mobile lors du clic sur un lien direct (non dropdown)
-document.querySelectorAll('.navbar-menu > li:not(.dropdown) > a').forEach(function(link) {
+// Fermer au clic sur un lien direct (non dropdown)
+document.querySelectorAll('.navbar-menu > li:not(.dropdown):not(.mobile-menu-header) > a').forEach(function(link) {
   link.addEventListener('click', function() {
-    if (window.innerWidth <= 768) {
-      toggleMobileMenu(false);
-    }
+    if (window.innerWidth <= 768) toggleMobileMenu(false);
   });
 });
 
 // Fermer menu et dropdowns au resize
 window.addEventListener('resize', function() {
   if (window.innerWidth > 768) {
-    if (navbarMenu && navbarMenu.classList.contains('active')) {
-      toggleMobileMenu(false);
-    }
+    if (navbarMenu && navbarMenu.classList.contains('active')) toggleMobileMenu(false);
     document.querySelectorAll('.navbar-menu .dropdown').forEach(function(d) {
       d.classList.remove('open');
     });

@@ -1167,100 +1167,150 @@ select.form-control {
 }
 
 /* ---- Tablets (768px) ---- */
+@keyframes menuSlideIn {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes subMenuOpen {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width: 768px) {
-  /* Navigation mobile — fond navy sombre */
+  /* Overlay plein écran */
   .navbar-menu {
     display: none;
     position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--couleur-bleu-fonce);
+    inset: 0;
+    background: linear-gradient(160deg, var(--couleur-bleu-fonce) 0%, #0d1f3c 100%);
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     padding: 0;
     overflow-y: auto;
     gap: 0;
     z-index: var(--z-fixed);
-    border-top: 3px solid var(--couleur-rouge-accent);
   }
-  .navbar-menu.active { display: flex; }
+  .navbar-menu.active {
+    display: flex;
+    animation: menuSlideIn 0.3s ease forwards;
+  }
   .navbar-toggle { display: flex; }
 
-  /* Items de premier niveau */
-  .navbar-menu > li { width: 100%; }
-
-  .navbar-menu > li > a {
+  /* ── En-tête mobile injecté par JS ── */
+  .mobile-menu-header {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem var(--espace-md);
-    font-size: 1.0625rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    width: 100%;
-    transition: background 0.2s ease, padding-left 0.2s ease, color 0.2s ease;
+    padding: 1.25rem var(--espace-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
   }
-  .navbar-menu > li > a::after { display: none !important; }
-  .navbar-menu > li > a:hover {
-    background: rgba(255, 255, 255, 0.06);
+  .mobile-menu-logo {
+    font-family: var(--police-titres);
+    font-size: 1.4rem;
+    font-weight: 800;
     color: var(--couleur-blanc);
-    padding-left: calc(var(--espace-md) + 6px);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .mobile-menu-logo span { color: var(--couleur-rouge-accent); }
+  .mobile-menu-close {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    color: var(--couleur-blanc);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  }
+  .mobile-menu-close:hover {
+    background: var(--couleur-rouge-accent);
+    border-color: var(--couleur-rouge-accent);
+    transform: rotate(90deg);
+  }
+
+  /* ── Liens de navigation ── */
+  .navbar-menu > li { width: 100%; }
+  .navbar-menu > li.mobile-menu-header { list-style: none; }
+
+  .navbar-menu > li:not(.mobile-menu-header) > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1.05rem var(--espace-lg);
+    font-family: var(--police-titres);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.88);
+    letter-spacing: 0.01em;
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.22s ease, color 0.22s ease;
+  }
+  .navbar-menu > li:not(.mobile-menu-header) > a::after { display: none !important; }
+  .navbar-menu > li:not(.mobile-menu-header) > a:hover {
+    background: var(--couleur-rouge-accent);
+    color: var(--couleur-blanc);
   }
 
   /* Chevron injecté par JS */
   .mobile-chevron {
-    font-size: 0.8rem;
-    opacity: 0.55;
-    transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+    font-size: 0.7rem;
+    opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     pointer-events: none;
-    flex-shrink: 0;
+  }
+  .dropdown.open > a {
+    background: var(--couleur-rouge-accent);
+    color: var(--couleur-blanc) !important;
   }
   .dropdown.open > a .mobile-chevron {
     transform: rotate(180deg);
     opacity: 1;
-    color: var(--couleur-rouge-accent);
   }
 
-  /* Sous-menus dropdown mobile */
+  /* ── Sous-menus ── */
   .dropdown-menu {
     position: static !important;
+    display: none;
     box-shadow: none;
     border-radius: 0;
     min-width: auto;
-    padding: 0;
+    padding: 0.25rem 0;
     margin: 0;
-    background: rgba(0, 0, 0, 0.35);
-    border-left: 3px solid var(--couleur-rouge-accent);
-    display: none;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
-  .dropdown.open > .dropdown-menu { display: block; }
+  .dropdown.open > .dropdown-menu {
+    display: block;
+    animation: subMenuOpen 0.25s ease forwards;
+  }
   .dropdown-menu li { list-style: none; }
   .dropdown-menu a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.85rem var(--espace-md) 0.85rem calc(var(--espace-md) + 1rem);
-    color: rgba(255, 255, 255, 0.72);
-    font-size: 0.9375rem;
+    display: block;
+    text-align: center;
+    padding: 0.8rem var(--espace-lg);
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 1rem;
     font-weight: 500;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s ease, color 0.2s ease;
+    border: none;
     white-space: normal;
-    transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
   }
-  .dropdown-menu a::before {
-    content: '›';
-    color: var(--couleur-rouge-accent);
-    font-size: 1.1rem;
-    line-height: 1;
-    flex-shrink: 0;
-  }
-  .dropdown-menu a::after { display: none !important; }
+  .dropdown-menu a::before { display: none; }
+  .dropdown-menu a::after  { display: none !important; }
   .dropdown-menu a:hover {
-    background: rgba(220, 38, 38, 0.18);
+    background: rgba(220, 38, 38, 0.25);
     color: var(--couleur-blanc);
-    padding-left: calc(var(--espace-md) + 1.25rem);
   }
   .dropdown > a::after { display: none; }
 

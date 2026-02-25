@@ -23,17 +23,12 @@ const navBackdrop = document.createElement('div');
 navBackdrop.id = 'nav-backdrop';
 document.body.appendChild(navBackdrop);
 
-// 2. En-tête du drawer : logo + bouton fermer
+// 2. Bouton fermer (X) en haut du drawer — pas de logo dans le panneau
 (function() {
-  var logoEl = document.querySelector('.navbar-logo');
-  if (!navbarMenu || !logoEl) return;
+  if (!navbarMenu) return;
   var li = document.createElement('li');
-  li.className = 'drawer-header-item';
-  li.innerHTML =
-    '<div class="drawer-header">' +
-      '<a href="' + logoEl.getAttribute('href') + '" class="drawer-logo">' + logoEl.innerHTML + '</a>' +
-      '<button class="drawer-close" aria-label="Fermer le menu"><i class="fas fa-times"></i></button>' +
-    '</div>';
+  li.className = 'drawer-close-item';
+  li.innerHTML = '<button class="drawer-close" aria-label="Fermer le menu"><i class="fas fa-times"></i></button>';
   navbarMenu.insertBefore(li, navbarMenu.firstChild);
   li.querySelector('.drawer-close').addEventListener('click', closeDrawer);
 })();

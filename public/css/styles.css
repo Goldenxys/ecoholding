@@ -1209,68 +1209,61 @@ select.form-control {
                 visibility 0s linear 0s;
   }
 
-  /* En-tête du drawer (injecté par JS) */
-  .drawer-header-item { list-style: none; flex-shrink: 0; }
-  .drawer-header {
+  /* Bouton fermer (injecté en haut du drawer) */
+  .drawer-close-item {
+    list-style: none;
+    flex-shrink: 0;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem var(--espace-md);
-    background: var(--couleur-bleu-principal);
-    border-bottom: 3px solid var(--couleur-rouge-accent);
+    justify-content: flex-end;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
     position: sticky;
     top: 0;
+    background: #fff;
     z-index: 1;
   }
-  .drawer-logo {
-    font-family: var(--police-titres);
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--couleur-blanc);
-    text-decoration: none;
-    letter-spacing: -0.01em;
-  }
-  .drawer-logo span { color: var(--couleur-rouge-accent); }
   .drawer-close {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    border: 1.5px solid #cbd5e1;
     border-radius: 8px;
-    color: var(--couleur-blanc);
+    color: #334155;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     -webkit-tap-highlight-color: transparent;
   }
   .drawer-close:hover, .drawer-close:active {
-    background: var(--couleur-rouge-accent);
+    background: #fee2e2;
     border-color: var(--couleur-rouge-accent);
+    color: var(--couleur-rouge-accent);
   }
 
   /* Liens du drawer */
   .navbar-menu > li { width: 100%; }
-  .navbar-menu > li:not(.drawer-header-item) > a {
+  .navbar-menu > li:not(.drawer-close-item) > a {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.9rem var(--espace-md);
     font-family: var(--police-titres);
-    font-size: 0.9375rem;
-    font-weight: 700;
-    color: var(--couleur-bleu-principal);
-    border-bottom: 1px solid var(--couleur-gris-moyen);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    border-bottom: 1px solid #e2e8f0;
     min-height: 52px;
     width: 100%;
-    transition: background 0.18s ease, color 0.18s ease;
+    transition: background 0.15s ease, color 0.15s ease;
     -webkit-tap-highlight-color: transparent;
   }
-  .navbar-menu > li:not(.drawer-header-item) > a::after { display: none !important; }
-  .navbar-menu > li:not(.drawer-header-item) > a:hover {
-    background: var(--couleur-rouge-clair);
+  .navbar-menu > li:not(.drawer-close-item) > a::after { display: none !important; }
+  .navbar-menu > li:not(.drawer-close-item) > a:hover,
+  .navbar-menu > li:not(.drawer-close-item) > a:active {
+    background: #f1f5f9;
     color: var(--couleur-rouge-accent);
   }
 

@@ -70,7 +70,7 @@
 /* ==================== RESET ET BASE ==================== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { font-size: 16px; scroll-behavior: smooth; }
+html { font-size: 16px; scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--police-corps);
@@ -232,7 +232,7 @@ img { max-width: 100%; height: auto; display: block; }
   box-shadow: var(--ombre-lg);
   border-radius: var(--rayon-md);
   padding: var(--espace-sm) 0;
-  min-width: 220px;
+  min-width: min(220px, 90vw);
   z-index: var(--z-sticky);
 }
 .dropdown-menu li { list-style: none; }
@@ -1330,6 +1330,7 @@ select.form-control {
     padding-top: 100px;
     padding-bottom: var(--espace-2xl);
   }
+  .hero::before { width: 500px; height: 500px; }
 
   .hero-container {
     grid-template-columns: 1fr;
@@ -1347,7 +1348,7 @@ select.form-control {
     flex-direction: column;
     align-items: center;
   }
-  .hero-buttons .btn { width: 100%; max-width: 320px; }
+  .hero-buttons .btn { width: 100%; max-width: 300px; }
   .hero-subtitle { font-size: 1.0625rem; }
 
   /* Sub-page hero */
@@ -1413,6 +1414,21 @@ select.form-control {
   .footer-bottom p { font-size: 0.8125rem; line-height: 1.6; }
 }
 
+/* ---- Intermediate phones (600px) ---- */
+@media (max-width: 600px) {
+  /* Hero decorative blob */
+  .hero::before { width: 400px; height: 400px; }
+
+  /* Section padding slightly tighter */
+  .section { padding: var(--espace-xl) 0; }
+
+  /* CEO stats: 3 columns is too tight on 500-600px screens */
+  .ceo-stats { grid-template-columns: repeat(2, 1fr); }
+
+  /* Buttons: safe width for small phones */
+  .hero-buttons .btn { max-width: 280px; }
+}
+
 /* ---- Small phones (480px) ---- */
 @media (max-width: 480px) {
   html { font-size: 15px; }
@@ -1424,6 +1440,8 @@ select.form-control {
     padding-top: 85px;
     padding-bottom: var(--espace-lg);
   }
+  .hero::before { width: 260px; height: 260px; }
+  .hero-buttons .btn { max-width: 260px; }
   .hero-title { font-size: 1.75rem; }
   .hero-badge { font-size: 0.75rem; padding: 0.3rem 0.75rem; }
   .hero-subtitle { font-size: 0.9375rem; }

@@ -135,6 +135,26 @@
     </div>
 </footer>
 
+{{-- ── Menu mobile off-canvas (hors <nav> pour éviter tout conflit CSS) ── --}}
+<div id="mobile-drawer" aria-hidden="true">
+    <div class="m-drawer-top">
+        <button id="mobile-drawer-close" aria-label="Fermer le menu">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <nav class="m-drawer-nav">
+        <a href="{{ route('home') }}">Accueil</a>
+        <a href="{{ route('services') }}">Services</a>
+        <a href="{{ route('regime-fiscal') }}" class="m-sub">Régime Fiscal</a>
+        <a href="{{ route('presentation') }}">Présentation</a>
+        <a href="{{ route('vision-valeurs') }}">Vision &amp; Valeurs</a>
+        <a href="{{ route('prestige-immobilier') }}">Prestige Immobilier</a>
+        <a href="{{ route('translogistique') }}">Translogistique</a>
+        <a href="{{ route('equipe') }}">Notre Équipe</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</div>
+
 {{-- ── Scripts ────────────────────────────────────────── --}}
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>

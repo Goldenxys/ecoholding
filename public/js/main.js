@@ -16,100 +16,46 @@ window.addEventListener('scroll', gerer_scroll_navbar);
 
 // ==================== MENU MOBILE — OFF-CANVAS DRAWER ====================
 const navbarToggle = document.querySelector('.navbar-toggle');
-const navbarMenu   = document.querySelector('.navbar-menu');
+const mobileDrawer = document.getElementById('mobile-drawer');
+const mobileDrawerClose = document.getElementById('mobile-drawer-close');
 
-// 1. Backdrop injecté dans le body
+// Backdrop
 const navBackdrop = document.createElement('div');
 navBackdrop.id = 'nav-backdrop';
 document.body.appendChild(navBackdrop);
 
-// 2. Bouton fermer (X) en haut du drawer — pas de logo dans le panneau
-(function() {
-  if (!navbarMenu) return;
-  var li = document.createElement('li');
-  li.className = 'drawer-close-item';
-  li.innerHTML = '<button class="drawer-close" aria-label="Fermer le menu"><i class="fas fa-times"></i></button>';
-  navbarMenu.insertBefore(li, navbarMenu.firstChild);
-  li.querySelector('.drawer-close').addEventListener('click', closeDrawer);
-})();
-
-// 3. Chevrons dans les liens dropdown
-document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(link) {
-  var ch = document.createElement('i');
-  ch.className = 'fas fa-chevron-down mobile-chevron';
-  link.appendChild(ch);
-});
-
-// 4. Ouvrir / Fermer
 function openDrawer() {
-  if (!navbarMenu) return;
-  navbarMenu.classList.add('active');
+  if (!mobileDrawer) return;
+  mobileDrawer.classList.add('active');
+  mobileDrawer.removeAttribute('aria-hidden');
   navBackdrop.classList.add('active');
   document.body.style.overflow = 'hidden';
-  if (navbarToggle) {
-    navbarToggle.setAttribute('aria-expanded', 'true');
-    var s = navbarToggle.querySelectorAll('span');
-    s[0].style.transform = 'rotate(45deg) translateY(8px)';
-    s[1].style.opacity   = '0';
-    s[2].style.transform = 'rotate(-45deg) translateY(-8px)';
-  }
 }
 
 function closeDrawer() {
-  if (!navbarMenu) return;
-  navbarMenu.classList.remove('active');
+  if (!mobileDrawer) return;
+  mobileDrawer.classList.remove('active');
+  mobileDrawer.setAttribute('aria-hidden', 'true');
   navBackdrop.classList.remove('active');
   document.body.style.overflow = '';
-  if (navbarToggle) {
-    navbarToggle.setAttribute('aria-expanded', 'false');
-    navbarToggle.querySelectorAll('span').forEach(function(s) {
-      s.style.transform = 'none';
-      s.style.opacity   = '1';
-    });
-  }
-  document.querySelectorAll('.navbar-menu .dropdown.open').forEach(function(d) {
-    d.classList.remove('open');
-  });
 }
 
-// 5. Bouton hamburger
 if (navbarToggle) {
   navbarToggle.addEventListener('click', function() {
-    navbarMenu.classList.contains('active') ? closeDrawer() : openDrawer();
+    mobileDrawer && mobileDrawer.classList.contains('active') ? closeDrawer() : openDrawer();
+  });
+}
+if (mobileDrawerClose) mobileDrawerClose.addEventListener('click', closeDrawer);
+navBackdrop.addEventListener('click', closeDrawer);
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeDrawer(); });
+
+// Fermer au clic sur n'importe quel lien du drawer
+if (mobileDrawer) {
+  mobileDrawer.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', closeDrawer);
   });
 }
 
-// 6. Fermer au clic sur le backdrop
-navBackdrop.addEventListener('click', closeDrawer);
-
-// 7. Fermer à la touche Échap
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeDrawer();
-});
-
-// 8. Toggle dropdown (mobile uniquement)
-document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(link) {
-  link.addEventListener('click', function(e) {
-    if (window.innerWidth > 768) return;
-    e.preventDefault();
-    var dropdown = this.parentElement;
-    var isOpen   = dropdown.classList.contains('open');
-    document.querySelectorAll('.navbar-menu .dropdown').forEach(function(d) { d.classList.remove('open'); });
-    if (!isOpen) dropdown.classList.add('open');
-  });
-});
-
-// 9. Fermer le drawer au clic sur un lien final (non parent dropdown)
-document.querySelectorAll('.navbar-menu a').forEach(function(link) {
-  link.addEventListener('click', function() {
-    if (window.innerWidth > 768) return;
-    var isDropdownParent = this.parentElement.classList.contains('dropdown') &&
-                           !this.closest('.dropdown-menu');
-    if (!isDropdownParent) closeDrawer();
-  });
-});
-
-// 10. Reset complet au resize desktop
 window.addEventListener('resize', function() {
   if (window.innerWidth > 768) closeDrawer();
 });

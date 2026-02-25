@@ -37,35 +37,60 @@ if (navbarToggle) {
   navbarToggle.addEventListener('click', function() { toggleMobileMenu(); });
 }
 
-// Handle dropdown toggle on mobile
+// Injecter le chevron dans chaque lien parent de dropdown
+document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(link) {
+  const chevron = document.createElement('i');
+  chevron.className = 'fas fa-chevron-down mobile-chevron';
+  link.appendChild(chevron);
+});
+
+// Toggle dropdown au clic sur mobile
 document.querySelectorAll('.navbar-menu .dropdown > a').forEach(function(dropdownLink) {
   dropdownLink.addEventListener('click', function(e) {
     if (window.innerWidth <= 768) {
-      const menu = this.parentElement.querySelector('.dropdown-menu');
-      if (menu) {
-        e.preventDefault();
-        const isOpen = menu.style.display === 'block';
-        document.querySelectorAll('.navbar-menu .dropdown-menu').forEach(function(dm) { dm.style.display = 'none'; });
-        menu.style.display = isOpen ? 'none' : 'block';
+      e.preventDefault();
+      const dropdown = this.parentElement;
+      const isOpen = dropdown.classList.contains('open');
+      // Ferme tous les autres dropdowns
+      document.querySelectorAll('.navbar-menu .dropdown').forEach(function(d) {
+        d.classList.remove('open');
+      });
+      if (!isOpen) {
+        dropdown.classList.add('open');
       }
     }
   });
 });
 
-// Fermer le menu mobile lors du clic sur un lien (sauf dropdowns)
-document.querySelectorAll('.navbar-menu a').forEach(function(link) {
+// Fermer le menu mobile lors du clic sur un sous-lien
+document.querySelectorAll('.navbar-menu .dropdown-menu a').forEach(function(link) {
   link.addEventListener('click', function() {
-    if (window.innerWidth <= 768 && !this.parentElement.classList.contains('dropdown')) {
+    if (window.innerWidth <= 768) {
+      const dropdown = this.closest('.dropdown');
+      if (dropdown) dropdown.classList.remove('open');
       toggleMobileMenu(false);
     }
   });
 });
 
-// Close mobile menu on window resize
+// Fermer le menu mobile lors du clic sur un lien direct (non dropdown)
+document.querySelectorAll('.navbar-menu > li:not(.dropdown) > a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    if (window.innerWidth <= 768) {
+      toggleMobileMenu(false);
+    }
+  });
+});
+
+// Fermer menu et dropdowns au resize
 window.addEventListener('resize', function() {
-  if (window.innerWidth > 768 && navbarMenu && navbarMenu.classList.contains('active')) {
-    toggleMobileMenu(false);
-    document.querySelectorAll('.navbar-menu .dropdown-menu').forEach(function(dm) { dm.style.display = ''; });
+  if (window.innerWidth > 768) {
+    if (navbarMenu && navbarMenu.classList.contains('active')) {
+      toggleMobileMenu(false);
+    }
+    document.querySelectorAll('.navbar-menu .dropdown').forEach(function(d) {
+      d.classList.remove('open');
+    });
   }
 });
 

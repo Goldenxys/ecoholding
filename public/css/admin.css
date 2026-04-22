@@ -74,11 +74,38 @@ body {
     justify-content: space-between;
 }
 
-.admin-logo a {
+.admin-logo a,
+.admin-logo-link {
     text-decoration: none;
     color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
+/* Image logo dans le header admin */
+.admin-logo-img {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    filter: brightness(1.05);
+    transition: opacity 0.2s ease;
+}
+
+.admin-logo-link:hover .admin-logo-img { opacity: 0.88; }
+
+.admin-logo-sub {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    display: block;
+    white-space: nowrap;
+}
+
+/* Garde la compatibilité si h2 encore présent */
 .admin-logo h2 {
     margin: 0;
     font-family: var(--police-titres);
@@ -89,7 +116,7 @@ body {
 
 .admin-logo .text-red { color: var(--couleur-rouge-accent); }
 
-.admin-logo span {
+.admin-logo span:not(.admin-logo-sub) {
     font-size: 0.8rem;
     opacity: 0.7;
     display: block;
@@ -1024,7 +1051,8 @@ textarea.form-control {
     /* Dashboard header */
     .dashboard-header h1 { font-size: 1.125rem; }
 
-    /* Admin header */
+    /* Admin header logo image */
+    .admin-logo-img { height: 44px; }
     .admin-logo h2 { font-size: 1.125rem; }
     .admin-logo span { font-size: 0.7rem; }
 

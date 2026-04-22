@@ -33,7 +33,7 @@
 
             .login-wrapper {
                 width: 100%;
-                max-width: 400px;
+                max-width: 440px;
                 padding: 1.5rem;
             }
 
@@ -42,31 +42,30 @@
                 margin-bottom: 2rem;
             }
 
-            .login-logo img {
-                width: 72px;
-                height: 72px;
-                border-radius: 50%;
-                object-fit: cover;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            .login-logo-img {
+                width: 400px;
+                max-width: 100%;
+                height: auto;
+                object-fit: contain;
+                display: block;
+                margin: 0 auto 0.5rem;
+                filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
             }
 
-            .login-logo h1 {
-                font-size: 1.5rem;
-                font-weight: 700;
-                color: #111827;
-                margin: 0.75rem 0 0;
-                letter-spacing: 1px;
-            }
-
-            .login-logo h1 span {
-                color: #dc2626;
+            .login-logo-sub {
+                font-size: 0.8rem;
+                font-weight: 600;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: #9ca3af;
+                margin-top: 0.25rem;
             }
 
             .login-card {
                 background: #ffffff;
-                border-radius: 12px;
+                border-radius: 16px;
                 padding: 2rem;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+                box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.2);
             }
 
             .login-footer {
@@ -75,12 +74,23 @@
                 color: #9ca3af;
                 font-size: 0.75rem;
             }
+
+            @media (max-width: 768px) {
+                .login-logo-img { width: 300px; }
+            }
+
+            @media (max-width: 480px) {
+                .login-logo-img { width: 250px; }
+                .login-wrapper { padding: 1rem; }
+                .login-card { padding: 1.5rem; border-radius: 12px; }
+            }
         </style>
     </head>
     <body>
         <div class="login-wrapper">
             <div class="login-logo">
-                <h1>ECO<span>+</span>HOLDING</h1>
+                <img src="{{ asset('images/logo.png') }}" alt="ECO+HOLDING" class="login-logo-img">
+                <p class="login-logo-sub">Espace Administration</p>
             </div>
 
             <div class="login-card">

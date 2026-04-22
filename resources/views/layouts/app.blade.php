@@ -32,9 +32,9 @@
             <header class="admin-header">
                 <div class="admin-header-content container">
                     <div class="admin-logo">
-                        <a href="{{ route('dashboard') }}">
-                            <h2>ECO<span class="text-red">+</span>HOLDING</h2>
-                            <span>Espace Administration</span>
+                        <a href="{{ route('dashboard') }}" class="admin-logo-link">
+                            <img src="{{ asset('images/logo.png') }}" alt="ECO+HOLDING" class="admin-logo-img">
+                            <span class="admin-logo-sub">Espace Administration</span>
                         </a>
                     </div>
                     <button class="admin-menu-toggle" aria-label="Toggle menu" onclick="document.querySelector('.admin-nav').classList.toggle('active')">

@@ -1,0 +1,56 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy via SSH
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, pdo, pdo_mysql
+
+      - name: Install Composer dependencies (no dev)
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Deploy to Hostinger via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host:     ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port:     ${{ secrets.SSH_PORT }}
+          script: |
+            set -e
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            # Pull dernière version
+            git pull origin main
+
+            # Dépendances PHP (sans dev)
+            composer install --no-dev --optimize-autoloader --no-interaction
+
+            # Migrations en toute sécurité
+            php artisan migrate --force
+
+            # Vider et reconstruire les caches
+            php artisan config:clear
+            php artisan cache:clear
+            php artisan route:clear
+            php artisan view:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            # Permissions storage/bootstrap
+            chmod -R 775 storage bootstrap/cache

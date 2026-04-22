@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="ECO+HOLDING - Cabinet de gestion d'affaires et d'intermédiation à Abidjan. Nous facilitons vos affaires, vous récoltez les résultats.">
+    <meta name="author" content="ADOU ANGE AKPALE">
+    <meta property="og:author" content="ADOU ANGE AKPALE">
     <title>@yield('title', 'ECO+HOLDING - Nous facilitons vos affaires')</title>
 
     <!-- Favicon -->
@@ -27,7 +29,7 @@
 <nav class="navbar">
     <div class="container navbar-container">
         <a href="{{ route('home') }}" class="navbar-logo">
-            ECO<span>+</span>HOLDING
+            <img src="{{ asset('images/logo.png') }}" alt="ECO+HOLDING" class="navbar-logo-img">
         </a>
 
         <ul class="navbar-menu">
@@ -78,10 +80,10 @@
                 <h4>ECO<span style="color: var(--couleur-rouge-accent)">+</span>HOLDING</h4>
                 <p>Cabinet de gestion d'affaires et d'intermédiation basé à Abidjan. Nous facilitons vos affaires, vous récoltez les résultats.</p>
                 <div class="footer-social">
-                    <a href="https://www.facebook.com/share/1HxMuKV6K7/" target="_blank" aria-label="Facebook">
+                    <a href="https://www.facebook.com/share/1CQsoi2L3Q/" target="_blank" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.tiktok.com/@eco.plus.holding?_r=1&_t=ZS-93ZZtAjgvqC" target="_blank" aria-label="TikTok">
+                    <a href="https://www.tiktok.com/@ecoplusholding225?_r=1&_t=ZS-95fj7V1qg2U" target="_blank" aria-label="TikTok">
                         <i class="fab fa-tiktok"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/eco-plus-holding-3ba682282" target="_blank" aria-label="LinkedIn">

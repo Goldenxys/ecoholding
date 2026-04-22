@@ -107,32 +107,32 @@
                 <div>
                     <ul style="list-style: none; padding: 0">
                         <li style="margin-bottom: var(--espace-md); display: flex; gap: var(--espace-sm)">
-                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px"></i>
-                            <span><strong>Quel régime fiscal</strong> convient à l'objet de mon entreprise ?</span>
+                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px; flex-shrink: 0;"></i>
+                            <span style="color: #000000; font-size: 1.05rem; line-height: 1.6;"><strong>Quel régime fiscal</strong> convient à l'objet de mon entreprise ?</span>
                         </li>
                         <li style="margin-bottom: var(--espace-md); display: flex; gap: var(--espace-sm)">
-                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px"></i>
-                            <span><strong>Que comprend</strong> ce régime fiscal ?</span>
+                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px; flex-shrink: 0;"></i>
+                            <span style="color: #000000; font-size: 1.05rem; line-height: 1.6;"><strong>Que comprend</strong> ce régime fiscal ?</span>
                         </li>
                         <li style="margin-bottom: var(--espace-md); display: flex; gap: var(--espace-sm)">
-                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px"></i>
-                            <span><strong>Combien devrais-je payer</strong> en impôts et à quelles échéances ?</span>
+                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px; flex-shrink: 0;"></i>
+                            <span style="color: #000000; font-size: 1.05rem; line-height: 1.6;"><strong>Combien devrais-je payer</strong> en impôts et à quelles échéances ?</span>
                         </li>
                     </ul>
                 </div>
                 <div>
                     <ul style="list-style: none; padding: 0">
                         <li style="margin-bottom: var(--espace-md); display: flex; gap: var(--espace-sm)">
-                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px"></i>
-                            <span><strong>À quoi sert</strong> mon numéro CNPS ?</span>
+                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px; flex-shrink: 0;"></i>
+                            <span style="color: #000000; font-size: 1.05rem; line-height: 1.6;"><strong>À quoi sert</strong> mon numéro CNPS ?</span>
                         </li>
                         <li style="margin-bottom: var(--espace-md); display: flex; gap: var(--espace-sm)">
-                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px"></i>
-                            <span><strong>Quels sont les pouvoirs</strong> du gérant ?</span>
+                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px; flex-shrink: 0;"></i>
+                            <span style="color: #000000; font-size: 1.05rem; line-height: 1.6;"><strong>Quels sont les pouvoirs</strong> du gérant ?</span>
                         </li>
                         <li style="margin-bottom: var(--espace-md); display: flex; gap: var(--espace-sm)">
-                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px"></i>
-                            <span><strong>Quelle est la durée</strong> de son mandat ?</span>
+                            <i class="fas fa-check-circle" style="color: var(--couleur-rouge-accent); font-size: 1.25rem; margin-top: 2px; flex-shrink: 0;"></i>
+                            <span style="color: #000000; font-size: 1.05rem; line-height: 1.6;"><strong>Quelle est la durée</strong> de son mandat ?</span>
                         </li>
                     </ul>
                 </div>
@@ -199,7 +199,7 @@
             </div>
 
             <div style="text-align: center; margin-top: var(--espace-xl)">
-                <a href="{{ route('home') }}#contact" class="btn btn-primary btn-large">
+                <a href="{{ route('home') }}#contact" class="btn btn-primary btn-large btn-cta-full">
                     <i class="fas fa-paper-plane"></i> Créer mon entreprise maintenant
                 </a>
             </div>

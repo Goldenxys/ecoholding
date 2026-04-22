@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="hero-visual">
-            <img src="{{ asset('images/hero-vision.jpg') }}" alt="ECO+HOLDING" class="hero-image">
+            <img src="{{ asset('images/team shoot.png') }}" alt="ECO+HOLDING Team" class="hero-image hero-image--team">
         </div>
     </div>
 </section>
@@ -183,6 +183,147 @@
         </div>
     </div>
 </section>
+
+{{-- ══════════ DOCUMENTS OFFICIELS ══════════ --}}
+<section class="section docs-officiels-section" style="background: linear-gradient(160deg, #05101F 0%, #0A1E3C 55%, #0E2448 100%); overflow: hidden; position: relative;">
+
+    {{-- Décoration fond --}}
+    <div style="position:absolute;top:-120px;right:-120px;width:500px;height:500px;background:radial-gradient(circle,rgba(220,38,38,0.12) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-80px;left:-80px;width:350px;height:350px;background:radial-gradient(circle,rgba(26,75,135,0.25) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+
+    <div class="container" style="position: relative; z-index: 1;">
+
+        {{-- En-tête --}}
+        <div class="section-title" data-aos="fade-up" style="margin-bottom: var(--espace-xl);">
+            <span class="section-title-small" style="color: #DC2626;">Certifiée par l'État Ivoirien</span>
+            <h2 style="color: #fff; font-size: clamp(1.75rem, 4vw, 2.75rem);">Une Entreprise Légale &amp; 100% Officielle</h2>
+            <p style="color: rgba(255,255,255,0.82); font-size: 1.1rem; max-width: 660px; margin: 0 auto;">
+                Avant de confier vos affaires à une structure, exigez les preuves. Nos documents délivrés et authentifiés par les autorités ivoiriennes compétentes sont là — consultables, vérifiables, incontestables.
+            </p>
+        </div>
+
+        {{-- Bandeau de confiance --}}
+        <div class="docs-trust-banner" data-aos="fade-up" data-aos-delay="100">
+            <div class="trust-icon"><i class="fas fa-shield-halved"></i></div>
+            <div class="trust-text">
+                <strong>Votre sécurité, notre priorité.</strong> Tous nos actes constitutifs ont été déposés, vérifiés et authentifiés par le Greffe du Tribunal de Commerce d'Abidjan et le Registre du Commerce et du Crédit Mobilier (RCCM). Aucune zone d'ombre, que de la transparence.
+            </div>
+        </div>
+
+        {{-- Nouvelle disposition : image doc + description côte à côte --}}
+        <div class="docs-new-layout" data-aos="fade-up" data-aos-delay="150">
+
+            {{-- Document 1 — Procès-Verbal --}}
+            <div class="doc-item doc-item--left">
+                <div class="doc-paper-wrap">
+                    <button class="doc-paper-btn" onclick="openDocModal('{{ asset('images/doc1.pdf') }}')" aria-label="Voir le procès-verbal">
+                        <div class="doc-paper-sheet doc-paper-sheet--1">
+                            <img src="{{ asset('images/doc1.png') }}" alt="Procès-Verbal de Dépôt de Pièces" class="doc-paper-img" loading="lazy">
+                            <div class="doc-paper-overlay">
+                                <span class="doc-paper-cta"><i class="fas fa-expand-alt"></i> Consulter</span>
+                            </div>
+                        </div>
+                        <div class="doc-paper-shadow"></div>
+                    </button>
+                </div>
+                <div class="doc-item-info">
+                    <div class="doc-item-badge"><i class="fas fa-gavel"></i> Tribunal de Commerce d'Abidjan</div>
+                    <h3 class="doc-item-title">Procès-Verbal de Dépôt de Pièces</h3>
+                    <p class="doc-item-ref"><i class="fas fa-hashtag"></i> N° 21474/GTCA/RC/2026 — 13 Mars 2026</p>
+                    <p class="doc-item-desc">Ce procès-verbal confirme le dépôt des 32 pièces constitutives d'ECO PLUS HOLDING au Greffe du Tribunal de Commerce d'Abidjan : statuts originaux signés, contrat de bail, CNI du gérant et déclaration sur l'honneur. Signé et authentifié par le Greffier en Chef.</p>
+                    <div class="doc-item-tags">
+                        <span><i class="fas fa-circle-check"></i> Authentifié</span>
+                        <span><i class="fas fa-calendar"></i> 13 Mars 2026</span>
+                        <span><i class="fas fa-location-dot"></i> Abidjan, CI</span>
+                    </div>
+                    <button onclick="openDocModal('{{ asset('images/doc1.pdf') }}')" class="btn btn-accent btn-small" style="margin-top: 1rem; width: 100%; justify-content: center;">
+                        <i class="fas fa-eye"></i> Voir le document complet
+                    </button>
+                </div>
+            </div>
+
+            {{-- Document 2 — RCCM --}}
+            <div class="doc-item doc-item--right">
+                <div class="doc-item-info">
+                    <div class="doc-item-badge" style="background: linear-gradient(135deg, #DC2626, #991B1B);"><i class="fas fa-building-columns"></i> Registre du Commerce — RCCM</div>
+                    <h3 class="doc-item-title">Déclaration d'Immatriculation</h3>
+                    <p class="doc-item-ref"><i class="fas fa-hashtag"></i> CI-ABJ-03-2026-B13-03910 — 24 Mars 2026</p>
+                    <p class="doc-item-desc">Déclaration officielle d'immatriculation au Registre du Commerce et du Crédit Mobilier. ECO PLUS HOLDING SARLU, capital social 3 000 000 F CFA, couvre la gestion d'affaires, l'immobilier, la logistique et l'intermédiation financière — active depuis le 27 janvier 2026.</p>
+                    <div class="doc-item-tags">
+                        <span><i class="fas fa-circle-check"></i> RCCM 2014-M1</span>
+                        <span><i class="fas fa-coins"></i> 3 000 000 F CFA</span>
+                        <span><i class="fas fa-calendar"></i> 24 Mars 2026</span>
+                    </div>
+                    <button onclick="openDocModal('{{ asset('images/doc2.pdf') }}')" class="btn btn-accent btn-small" style="margin-top: 1rem; width: 100%; justify-content: center;">
+                        <i class="fas fa-eye"></i> Voir le document complet
+                    </button>
+                </div>
+                <div class="doc-paper-wrap">
+                    <button class="doc-paper-btn" onclick="openDocModal('{{ asset('images/doc2.pdf') }}')" aria-label="Voir la déclaration RCCM">
+                        <div class="doc-paper-sheet doc-paper-sheet--2">
+                            <img src="{{ asset('images/doc3.png') }}" alt="Déclaration d'Immatriculation RCCM" class="doc-paper-img" loading="lazy">
+                            <div class="doc-paper-overlay">
+                                <span class="doc-paper-cta"><i class="fas fa-expand-alt"></i> Consulter</span>
+                            </div>
+                        </div>
+                        <div class="doc-paper-shadow"></div>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        {{-- Stats légales --}}
+        <div class="docs-legal-stats" data-aos="fade-up" data-aos-delay="300">
+            <div class="legal-stat-item"><i class="fas fa-scale-balanced"></i><span>SARLU Légalement Constituée</span></div>
+            <div class="legal-stat-sep"></div>
+            <div class="legal-stat-item"><i class="fas fa-building"></i><span>Siège : Cocody Riviera Palmeraie</span></div>
+            <div class="legal-stat-sep"></div>
+            <div class="legal-stat-item"><i class="fas fa-id-badge"></i><span>RCCM : CI-ABJ-03-2026-B13-03910</span></div>
+            <div class="legal-stat-sep"></div>
+            <div class="legal-stat-item"><i class="fas fa-coins"></i><span>Capital : 3 000 000 F CFA</span></div>
+        </div>
+    </div>
+</section>
+
+{{-- ══ MODAL DOCUMENT VIEWER ══ --}}
+<div id="doc-modal" class="doc-modal-overlay" onclick="closeDocModal()" role="dialog" aria-modal="true" aria-label="Visualiseur de document">
+    <div class="doc-modal-box" onclick="event.stopPropagation()">
+        <div class="doc-modal-header">
+            <span class="doc-modal-title"><i class="fas fa-file-alt"></i> Document Officiel — ECO PLUS HOLDING</span>
+            <button class="doc-modal-close" onclick="closeDocModal()" aria-label="Fermer"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="doc-modal-body">
+            <iframe id="doc-modal-iframe" src="" class="doc-modal-iframe" title="Document officiel"></iframe>
+        </div>
+        <div class="doc-modal-footer">
+            <a id="doc-modal-download" href="#" target="_blank" class="btn btn-accent btn-small">
+                <i class="fas fa-external-link-alt"></i> Ouvrir dans un nouvel onglet
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+function openDocModal(url) {
+    var modal = document.getElementById('doc-modal');
+    var iframe = document.getElementById('doc-modal-iframe');
+    var dl = document.getElementById('doc-modal-download');
+    iframe.src = url;
+    dl.href = url;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeDocModal() {
+    var modal = document.getElementById('doc-modal');
+    var iframe = document.getElementById('doc-modal-iframe');
+    modal.classList.remove('active');
+    iframe.src = '';
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeDocModal();
+});
+</script>
 
 {{-- ══════════ CTA ══════════ --}}
 <section class="section">

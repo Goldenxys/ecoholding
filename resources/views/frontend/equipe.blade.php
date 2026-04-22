@@ -35,7 +35,7 @@
             <div class="ceo-showcase__content">
                 <div class="ceo-header">
                     <div>
-                        <h2 class="ceo-name">Kouassi Yao</h2>
+                        <h2 class="ceo-name">Adou Ange Akpale</h2>
                         <p class="ceo-title">Directeur Général & Fondateur</p>
                     </div>
                     <div class="ceo-socials">
@@ -60,8 +60,8 @@
 
                     <div class="ceo-description">
                         <p>
-                            Fort de plus de <strong>15 ans d'expérience</strong> dans la gestion d'affaires et l'intermédiation,
-                            Kouassi Yao a fondé ECO+HOLDING avec la vision de créer un écosystème intégré de services
+                            Fort de son expertise dans la gestion d'affaires et l'intermédiation,
+                            Adou Ange Akpale a fondé ECO+HOLDING avec la vision de créer un écosystème intégré de services
                             d'excellence pour les entreprises africaines.
                         </p>
                         <p>

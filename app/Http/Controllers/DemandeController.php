@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Demande;
-use App\Mail\NouvelleDemandeAdminMail;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class DemandeController extends Controller
@@ -86,10 +84,6 @@ class DemandeController extends Controller
             'statut' => Demande::STATUT_NOUVEAU,
         ]);
 
-        if (config('mail.admin_address')) {
-            Mail::to(config('mail.admin_address'))->send(new NouvelleDemandeAdminMail($demande));
-        }
-
         return response()->json([
             'success' => true,
             'message' => 'Votre demande a été envoyée avec succès! Nous vous contacterons bientôt.',
@@ -146,16 +140,11 @@ class DemandeController extends Controller
      */
     public function statsApi(): JsonResponse
     {
-        $derniereDemande = Demande::latest('date_creation')->first();
-
         return response()->json([
-            'total' => Demande::count(),
-            'nouveau' => Demande::where('statut', Demande::STATUT_NOUVEAU)->count(),
+            'total'    => Demande::count(),
+            'nouveau'  => Demande::where('statut', Demande::STATUT_NOUVEAU)->count(),
             'en_cours' => Demande::where('statut', Demande::STATUT_EN_COURS)->count(),
-            'traite' => Demande::where('statut', Demande::STATUT_TRAITE)->count(),
-            'derniere_id' => $derniereDemande?->id,
-            'derniere_nom' => $derniereDemande ? $derniereDemande->nom . ' ' . $derniereDemande->prenom : null,
-            'derniere_service' => $derniereDemande?->service,
+            'traite'   => Demande::where('statut', Demande::STATUT_TRAITE)->count(),
         ]);
     }
 
